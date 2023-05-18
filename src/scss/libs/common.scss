@@ -1,0 +1,63 @@
+
+.h-content{
+    height: fit-content;
+}
+
+.w-content{
+    width: fit-content;
+}
+
+.gap-1{
+    gap: 1rem;
+}
+
+.gap-2{
+    gap: 2rem;
+}
+
+.gap-3{
+    gap: 3rem;
+}
+
+.gap-4{
+    gap: 4rem;
+}
+
+.list-none{
+    list-style: none;
+}
+
+.fwl{
+    font-weight: $font-weight-light !important;
+}
+
+.fwn{
+    font-weight: $font-weight-normal !important;
+}
+
+.fwb{
+    font-weight: $font-weight-bold !important;
+}
+
+.list-none{
+    list-style: none;
+}
+
+.uppercase{
+    text-transform: uppercase;
+}
+
+.lowercase{
+    text-transform: lowercase;
+}
+
+.capitalize{
+    text-transform: capitalize;
+}
+
+.primary{
+    color: $primary !important;
+}
+.dark{
+    color: $default !important;
+}

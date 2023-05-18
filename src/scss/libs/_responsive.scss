@@ -1,0 +1,26 @@
+$medium: 768px;
+$large: 992px;
+$medium-up: "only screen and (min-width: #{$medium})";
+$medium-down: "only screen and (max-width: #{$large})";
+$large-up: "only screen and (min-width: #{$large})";
+$large-down: "only screen and (min-width: #{$large})";
+
+@media #{$medium-up} {
+    .public{
+        &-layout{
+            padding: 8px 32px;
+        }
+        .header{
+            height: 40vh;
+            h1{
+                width: 60%;
+                margin: 0 auto;
+                font-size: 2.4em;
+                font-weight: 600;
+                letter-spacing: 2px;
+                text-align: center;
+                text-transform: capitalize;
+            }
+        }
+    }
+}
