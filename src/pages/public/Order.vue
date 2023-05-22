@@ -59,13 +59,14 @@
                 </div>
             </template>
         </Stepper>
-        <div class="order-summary col-md">
-            Détails commande
+        <div class="col-md">
+            <OrderSummary />
         </div>
     </div>
 </template>
 <script setup>
 import Stepper from '../../components/Stepper.vue'
+import OrderSummary from './views/OrderSummary.vue'
 import { reactive, ref } from 'vue'
 
 const steps = reactive([

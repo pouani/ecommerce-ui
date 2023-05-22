@@ -1,4 +1,5 @@
 import { defineStore } from "pinia";
+import { parse, stringify } from 'zipson';
 
 //store cart, add to cart
 export const useCartStore = defineStore({
@@ -61,5 +62,12 @@ export const useCartStore = defineStore({
               }
             }
           },
-    }
+    },
+    persist: {
+        paths: ["cart"],
+        serializer: {
+            deserialize: parse,
+            serialize: stringify,
+        }
+    },
 })
