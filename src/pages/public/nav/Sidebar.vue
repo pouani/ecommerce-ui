@@ -19,7 +19,9 @@
                 @click="useCart.removeFromCart(item)"
                 class="fa-solid fa-xmark mt-3 gray-300 cursor-pointer"></i>
         </div>
-        <button class="btn btn-primary mx-1 my-2 w-100">Commandez maintenant</button>
+        <router-link :to="{ name: 'commande' }" class="btn btn-primary mx-1 my-2 w-100">
+            Commandez maintenant
+        </router-link>
     </div>
 </template>
 <script setup>
