@@ -61,3 +61,47 @@
 .dark{
     color: $default !important;
 }
+
+.default{
+    color: $default !important;
+}
+
+.yellow{
+    color: $yellow !important;
+}
+
+.gray-100{
+    color: $gray-100 !important;
+}
+
+.gray-200{
+    color: $gray-200 !important;
+}
+
+.gray-300{
+    color: $gray-300 !important;
+}
+
+.bg-gray-100{
+    background-color: $gray-100 !important;
+}
+
+.bg-gray-200{
+    background-color: $gray-200 !important;
+}
+
+.rounded-32{
+    border-radius: 32px !important;
+}
+
+.cursor-pointer{
+    cursor: pointer;
+}
+
+.w-40{
+    width: 40%;
+}
+
+.w-35{
+    width: 35%;
+}

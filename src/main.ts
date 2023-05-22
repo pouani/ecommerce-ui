@@ -1,6 +1,8 @@
 import { createApp } from 'vue'
 import BootstrapVueNext from 'bootstrap-vue-next'
 import router from './_routes'
+//store pinia
+import './_store'
 
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue-next/dist/bootstrap-vue-next.css'

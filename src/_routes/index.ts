@@ -11,8 +11,28 @@ const routes: Array<RouteRecordRaw> = [
                 path: '',
                 name: 'Home',
                 component: () => import('../pages/public/Home.vue'),
+            },
+            {
+                path: '/products',
+                name: 'all-product',
+                component: () => import('../pages/public/Products.vue'),
+            },
+            {
+                path: '/product/:id',
+                name: 'product-detail',
+                component: () => import('../pages/public/views/ProductDetail.vue'),
+                props: true,
+            },
+            {
+                path: '/commande',
+                name: 'commande',
+                component: () => import('../pages/public/Commande.vue'),
+            },
+            {
+                path: "/:pathMatch(.*)", redirect: "/"
             }
-        ]
+        ],
+        
     },
     {
         path: '/admin',

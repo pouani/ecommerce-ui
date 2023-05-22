@@ -1,14 +1,18 @@
 <template lang="">
     <div>
         <b-navbar toggleable="lg" type="dark" class="border-bottom">
-            <b-navbar-brand href="#">Sk-M</b-navbar-brand>
+            <b-navbar-brand href="#">
+                Sk-M
+            </b-navbar-brand>
 
             <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
             <b-collapse id="nav-collapse" is-nav>
                 <div class="d-md-flex justify-content-between align-items-center w-100">
                     <ul class="list-none m-0 d-md-flex gap-3">
-                        <li class="h-content" href="#">Accueil</li>
+                        <router-link class="h-content" :to="{ name: 'Home' }">
+                            Accueil
+                        </router-link>
                         <li>
                             <b-nav-item-dropdown text="Categorie" right>
                                 <b-dropdown-item href="#">Categorie 1</b-dropdown-item>
@@ -17,7 +21,16 @@
                                 <b-dropdown-item href="#">Categorie 1</b-dropdown-item>
                             </b-nav-item-dropdown>
                         </li>
-                        <li class="h-content" href="#">Produits</li>
+                        <router-link class="h-content" :to="{ name: 'all-product' }">
+                            Produits
+                        </router-link>
+                        <!-- <router-link class="h-content" :to="{ name: 'all-product' }">
+                            Produits
+                        </router-link>
+                        <router-link class="h-content" :to="{ name: 'all-product' }">
+                            Produits
+                        </router-link> -->
+                        <li class="h-content" href="#">Livraison</li>
                         <li class="h-content" href="#">Contact</li>
                     </ul>
 
@@ -34,11 +47,7 @@
                                 <i class="fa-solid fa-cart-shopping"></i>
                             </button>
 
-                            <b-button right>
-                                <span>
-                                    <i class="fa-solid fa-user mx-1"></i>Mon compte
-                                </span>
-                            </b-button>
+                            <Login />
                         </div>
                     </b-navbar-nav>
                 </div>
@@ -47,4 +56,5 @@
     </div>
 </template>
 <script setup>
+import Login from '../Login.vue'
 </script>
