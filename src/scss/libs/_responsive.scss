@@ -1,9 +1,11 @@
 $medium: 768px;
 $large: 992px;
+$large-2xl: 1400px;
 $medium-up: "only screen and (min-width: #{$medium})";
 $medium-down: "only screen and (max-width: #{$large})";
 $large-up: "only screen and (min-width: #{$large})";
 $large-down: "only screen and (min-width: #{$large})";
+$large-2xl: "only screen and (min-width: #{$large-2xl})";
 
 @media #{$medium-up} {
     .public{
@@ -56,6 +58,22 @@ $large-down: "only screen and (min-width: #{$large})";
                         font-size: 2rem;
                     }
                 }
+            }
+        }
+    }
+}
+
+@media #{$large-2xl} {
+    .public{
+        .home{
+            padding: 0 16rem;
+        }
+        .order{
+            &-form{
+                margin: 0 8rem;
+            }
+            .step-buttons{
+                margin: 0 6.8rem;
             }
         }
     }

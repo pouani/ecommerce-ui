@@ -162,6 +162,9 @@ body{
     }
 
     .product{
+        height: 70vh !important;
+        display: flex;
+        align-items: center;
         &_content{
             background-color: var(--White);
             border-radius: .6rem;
@@ -238,7 +241,11 @@ body{
           .completed .step-number {
             background-color: $primary;
           }
-      }
+    }
+    .order{
+        height: 80vh;
+        padding: 2rem;
+    }
 }
 
 img{

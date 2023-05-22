@@ -26,7 +26,7 @@ const routes: Array<RouteRecordRaw> = [
             {
                 path: '/commande',
                 name: 'commande',
-                component: () => import('../pages/public/Commande.vue'),
+                component: () => import('../pages/public/Order.vue'),
             },
             {
                 path: "/:pathMatch(.*)", redirect: "/"
