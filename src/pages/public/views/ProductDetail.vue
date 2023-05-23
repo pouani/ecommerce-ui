@@ -21,9 +21,9 @@
                         <input type="text" v-model="quantity" class="form-control text-center border-0">
                         <button @click="useCart.incrementQuantity(productData)" class="btn">+</button>
                     </div>
-                    <button class="btn btn-primary rounded-32">
-                        <span>Commander maintenant</span>
-                    </button>
+                    <router-link :to="{ name: 'commande' }" class="btn btn-primary rounded-32 text-white mx-1 my-2 w-100">
+                        Commandez maintenant
+                    </router-link>
                 </div>
             </div>
             </div>

@@ -41,11 +41,11 @@
             <ul class="list-none p-0">
                 <li class="d-flex justify-content-between mb-3">
                     <h5>Total Produit</h5>
-                    <h5>{{ totalQuantity }}</h5>
+                    <h5>{{ useCart.cartQuantity }}</h5>
                 </li>
                 <li class="d-flex justify-content-between mb-3">
                     <h5>Total Prix</h5>
-                    <h5>{{ totalPrice }} cfa</h5>
+                    <h5>{{ useCart.cartTotalPrice }} cfa</h5>
                 </li>
                 <li class="d-flex justify-content-between mb-3">
                     <h5>Livraison</h5>
@@ -68,23 +68,5 @@ const useCart = useCartStore()
 const routes = useRoute();
 
 const cartData = useCart.cart;
-let quantity = computed(() => {
-    return 1
-    // const index = useCart.cart.findIndex((item) => item.id === productData.value.id);
-    // return index != -1 ? useCart.cart[index].quantity : 0;
-});
-
-//total quantity
-const totalQuantity = computed(() => {
-    return cartData.reduce((acc, item) => acc + item.quantity, 0);
-});
-
-//total price
-const totalPrice = computed(() => {
-    return cartData.reduce((acc, item) => acc + item.price * item.quantity, 0);
-});
-
-console.log(totalPrice)
-console.log(cartData)
 
 </script>
