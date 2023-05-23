@@ -10,7 +10,7 @@
             <b-collapse id="nav-collapse" is-nav>
                 <div class="d-md-flex justify-content-between align-items-center w-100">
                     <ul class="list-none m-0 d-md-flex gap-3">
-                        <router-link class="h-content" :to="{ name: 'Home' }">
+                        <router-link exact class="h-content" :to="{ name: 'Home' }">
                             Accueil
                         </router-link>
                         <li>
@@ -21,7 +21,7 @@
                                 <b-dropdown-item href="#">Categorie 1</b-dropdown-item>
                             </b-nav-item-dropdown>
                         </li>
-                        <router-link class="h-content" :to="{ name: 'all-product' }">
+                        <router-link exact class="h-content" :to="{ name: 'all-product' }">
                             Produits
                         </router-link>
                         <!-- <router-link class="h-content" :to="{ name: 'all-product' }">
@@ -44,6 +44,9 @@
                         </b-nav-form>
                         <div class="d-flex gap-2">
                             <button class="btn">
+                                <span class="cart-quantity">
+                                    {{ useCart.cartQuantity }}
+                                </span>
                                 <i class="fa-solid fa-cart-shopping"></i>
                             </button>
 
@@ -57,4 +60,8 @@
 </template>
 <script setup>
 import Login from '../Login.vue'
+import { ref, computed } from 'vue'
+import { useCartStore } from '../../../_store/carts'
+
+const useCart = useCartStore()
 </script>

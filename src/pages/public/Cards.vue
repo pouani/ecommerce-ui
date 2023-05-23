@@ -32,7 +32,7 @@
         </div>
         <div class="text-center mt-3">
             <router-link :to="{ name: 'all-product' }" 
-                class="btn btn-primary">Plus de produits</router-link>
+                class="btn btn-primary text-white"><i class="fa-solid fa-plus"></i> Produits</router-link>
         </div>
     </div>
 </template>

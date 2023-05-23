@@ -68,6 +68,9 @@ $large-2xl: "only screen and (min-width: #{$large-2xl})";
         .home{
             padding: 0 16rem;
         }
+        .products{
+            padding: 3rem 16rem;
+        }
         .order{
             &-form{
                 margin: 0 8rem;

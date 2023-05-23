@@ -6,11 +6,19 @@ export const useCartStore = defineStore({
     id: "cart",
     state: () => ({
         cart: [] as any,
-        showCart: false
+        showCart: false,
+        cartQuantity: 0,
+        cartTotalPrice: 0
     }),
     getters: {
         getCart(): any {
             return this.cart
+        },
+        getCartQuantity(): Number {
+            return this.cartQuantity = this.cart.reduce((acc, item) => acc + item.quantity, 0);
+        },
+        getCartTotalPrice(): Number {
+            return this.cartTotalPrice = this.cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
         }
     },
     actions: {
@@ -61,7 +69,7 @@ export const useCartStore = defineStore({
                 this.cart.splice(index, 1);
               }
             }
-          },
+        },
     },
     persist: {
         paths: ["cart"],
