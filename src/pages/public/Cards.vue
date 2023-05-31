@@ -1,7 +1,7 @@
 <template lang="">
     <div>
         <div class="my-5 d-flex gap-1 justify-content-end">
-            <li class="list-none bg-gray-200 w-content px-3 py-2 rounded-32">
+            <li class="list-none bg-white w-content px-3 py-2 rounded-32">
                 <b-nav-item-dropdown text="Prix" right>
                     <b-dropdown-item href="#">250 - 900</b-dropdown-item>
                     <b-dropdown-item href="#">1000 - 1900</b-dropdown-item>
@@ -9,7 +9,7 @@
                     <b-dropdown-item href="#">3000+</b-dropdown-item>
                 </b-nav-item-dropdown>
             </li>
-            <li class="list-none bg-gray-200 w-content px-3 py-2 rounded-32">
+            <li class="list-none bg-white w-content px-3 py-2 rounded-32">
                 <b-nav-item-dropdown text="Reviews" right>
                     <b-dropdown-item href="#">4 etoiles</b-dropdown-item>
                     <b-dropdown-item href="#">3 etoiles</b-dropdown-item>
@@ -21,7 +21,7 @@
         <h3>Meilleurs Produits</h3>
         <div class="row">
             <CardItems 
-                class="col-6 col-md-3 mb-3" 
+                class="col-6 col-md-3 p-1" 
                 v-for="item in useProducts.products" :key="index" 
                 :productImage="item.image"
                 :productName="item.name"

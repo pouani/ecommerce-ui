@@ -1,13 +1,10 @@
 <template lang="">
     <div>
-        Dashboard page
+        <Historique />
+        <Chart />
     </div>
 </template>
-<script>
-export default {
-    
-}
+<script setup>
+import Historique from "./Historique.vue"
+import Chart from "./Chart.vue"
 </script>
-<style lang="">
-    
-</style>

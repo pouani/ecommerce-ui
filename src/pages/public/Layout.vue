@@ -1,7 +1,9 @@
 <template lang="">
     <div class="public">
-        <NavbarTop />
-        <Navbar />
+        <div class="position-fixed w-100 z-99 mb-4">
+            <NavbarTop />
+            <Navbar />
+        </div>
         <Transition name="bounce">
             <Sidebar />
         </Transition>

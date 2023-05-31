@@ -41,11 +41,11 @@
             <ul class="list-none p-0">
                 <li class="d-flex justify-content-between mb-3">
                     <h5>Total Produit</h5>
-                    <h5>{{ useCart.cartQuantity }}</h5>
+                    <h5>{{ totalQuantity }}</h5>
                 </li>
                 <li class="d-flex justify-content-between mb-3">
                     <h5>Total Prix</h5>
-                    <h5>{{ useCart.cartTotalPrice }} cfa</h5>
+                    <h5>{{ totalPrice }} cfa</h5>
                 </li>
                 <li class="d-flex justify-content-between mb-3">
                     <h5>Livraison</h5>
@@ -68,5 +68,12 @@ const useCart = useCartStore()
 const routes = useRoute();
 
 const cartData = useCart.cart;
+
+const totalPrice = ref(0)
+const totalQuantity = ref(0)
+totalQuantity.value = computed(() => useCart.getCartQuantity)
+totalPrice.value = computed(() => useCart.getCartTotalPrice)
+
+
 
 </script>

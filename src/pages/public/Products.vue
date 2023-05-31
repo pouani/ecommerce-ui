@@ -12,7 +12,7 @@
                 :product="item"
             />
         </div>
-        <div class="float-end overflow-auto">
+        <div class="overflow-auto d-flex justify-content-end">
             <b-pagination
                 v-model="currentPage"
                 :total-rows="rows"

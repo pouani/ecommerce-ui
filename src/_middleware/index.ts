@@ -2,7 +2,7 @@
  * middleware 
  */
 
-import router from "@/_routes"
+import router from "../_routes"
 
 export function authGuard(to: any){
     let token = localStorage.getItem('token');
@@ -10,6 +10,5 @@ export function authGuard(to: any){
     if(token){
         return true;
     }
-
-    router.push({name: 'login'});
+    router.push('/');
 }

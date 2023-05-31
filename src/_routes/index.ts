@@ -1,5 +1,8 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 
+//fichier de vérification et récupération du token d'existance du token
+import { authGuard } from '../_middleware';
+
 
 const routes: Array<RouteRecordRaw> = [
     {
@@ -36,12 +39,12 @@ const routes: Array<RouteRecordRaw> = [
     },
     {
         path: '/admin',
-        name: 'Dashboard',
+        name: 'admin',
         component: () => import('../pages/admin/Layout.vue'),
         children: [
             {
-                path: '',
-                name: 'Dashboard',
+                path: '/admin',
+                name: 'dashboard',
                 component: () => import('../pages/admin/dashboard/Dashboard.vue'),
             },
         ],
@@ -55,9 +58,9 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-    if(to.matched[0].name == 'Dashboard') {
-        console.log('Dashboard');
-        
+    if(to.matched[0].name == 'admin') {
+        console.log(to.matched[0].name)
+        authGuard(to);
     }
     next();
 });

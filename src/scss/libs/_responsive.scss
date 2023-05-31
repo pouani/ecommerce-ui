@@ -61,6 +61,9 @@ $large-2xl: "only screen and (min-width: #{$large-2xl})";
             }
         }
     }
+    .modal-content {
+        width: 80% !important;
+    }
 }
 
 @media #{$large-2xl} {

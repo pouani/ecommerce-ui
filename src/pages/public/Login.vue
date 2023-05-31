@@ -2,7 +2,7 @@
     <div class="default">
         <button @click="modalShow = !modalShow" class="btn bg-gray-200 rounded-32"><i class="fa-solid fa-user mx-1"></i>Connexion</button>
 
-        <b-modal v-model="modalShow" hide-footer hide-header hide-header-close centered>
+        <b-modal v-model="modalShow" hide-footer title="Se connecter" hide-header-close centered>
             <form action="" class="default">
                 <div class="mb-3">
                     <div class="border d-flex align-items-center rounded overflow-hidden">
@@ -40,9 +40,13 @@
 </template>
 <script setup>
 import { ref, reactive, computed } from "vue"
+import {useRouter, useRoute } from 'vue-router';
 import { useVuelidate } from '@vuelidate/core'
 import { required, email, minLength } from '@vuelidate/validators'
 
+
+const router = useRouter();
+console.log(router)
 
 const modalShow = ref(false)
 
@@ -67,6 +71,8 @@ const submit = () => {
     if(!v$.value.$error){
         console.log(state)
         modalShow.value = false
+        localStorage.setItem('token', 'david')
+        router.push({ name: 'admin' })
     }else{
         console.log(v$.value)
     }

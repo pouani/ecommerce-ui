@@ -43,9 +43,9 @@
                             </button>
                         </b-nav-form>
                         <div class="d-flex gap-2">
-                            <button class="btn">
+                            <button class="btn" @click="useCart.showCart = !useCart.showCart">
                                 <span class="cart-quantity">
-                                    {{ useCart.cartQuantity }}
+                                    {{ quantity }}
                                 </span>
                                 <i class="fa-solid fa-cart-shopping"></i>
                             </button>
@@ -60,8 +60,11 @@
 </template>
 <script setup>
 import Login from '../Login.vue'
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { useCartStore } from '../../../_store/carts'
 
 const useCart = useCartStore()
+
+const quantity = ref(0)
+quantity.value = computed(() => useCart.getCartQuantity)
 </script>

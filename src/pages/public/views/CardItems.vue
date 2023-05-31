@@ -1,11 +1,15 @@
 <template lang="">
     <div>
         <div class="card border-0 default gap-2" style="max-width: 20rem;">
-            <router-link @click="useCart.addToCart(product)" :to="{name: 'product-detail', params: { id: product.id}}">
+            <router-link 
+                @click="useCart.addToCart(product), useCart.showCart = false" 
+                :to="{name: 'product-detail', params: { id: product.id}}"
+                class=""
+            >
                 <div class="card-img">
                     <img :src="productImage" alt="" class="w-100">
                 </div>
-                <div class="">
+                <div class="px-2">
                     <ul class="list-none p-0 m-0 d-flex justify-content-between">
                         <li class="fwb">{{ productName }}</li>
                         <li>{{ productPrice }}</li>
@@ -22,7 +26,7 @@
             </router-link>
             <button 
                 @click="useCart.addToCart(product)"
-                type="button" class="btn my-2 w-content">
+                type="button" class="btn m-2 w-content">
                 Ajouter <i class="fa-solid fa-cart-shopping mt-1"></i>
             </button>
         </div>
