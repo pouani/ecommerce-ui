@@ -42,7 +42,6 @@ export const useCategorieStore = defineStore({
             }
             await Categorie.createCategorie(submitState).then((response: any) => {
                 this.categories.push(response.data)
-                console.log(this.categories)
             }).catch((error: any) =>{
                 console.log(error)
             })

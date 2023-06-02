@@ -1,6 +1,9 @@
 <template lang="">
     <div>
-        <div v-if="useCategorie?.categories" class="default px-md-3">
+        <div class="mx-1">
+            <button class="btn">back</button>
+        </div>
+        <div class="default px-md-3">
             <div class="d-flex justify-content-between my-3">
                 <h4>Categorie</h4>
                 <button 
@@ -9,31 +12,37 @@
                 >+ categorie</button>
             </div>
             <ul class="row gray-600 list-none p-0 m-0">
-                <li class="col-2 col-md-2">#</li>
+                <li class="col-1 col-md-1">#</li>
                 <li class="col col-md">Nom</li>
                 <li class="d-none d-md-block col col-md">Description</li>
                 <li class="d-none d-md-block col col-md">Code</li>
-                <li class="col col-md text-center">Action {{update}}</li>
+                <li class="d-none d-md-block col col-md">Status</li>
+                <li class="col col-md text-center">Action</li>
             </ul>
             <ul 
                 v-for="(item, index) in useCategorie?.categories" :key="index"
                 class="row default align-items-center default py-2 rounded bg-white list-none p-0 mx-0 mb-1">
-                <li class="col-2 col-md-2 fwb">{{ index + 1}}</li>
+                <li class="col-1 col-md-1 fwb">{{ index + 1}}</li>
                 <li class="col col-md">{{ item.nomCategorie }}</li>
                 <li class="d-none d-md-block col col-md">{{useTruncate(item.description, 20)}}</li>
                 <li class="d-none d-md-block col col-md">{{ item.codeCategorie }}</li>
+                <li class="col col-md">
+                    <span 
+                        class="rounded-32 py-1 px-2"
+                        :class="item.status ? 'bg-success' : 'text-danger'"
+                    >{{ item.status ? 'avec produits' : 'sans produits' }}</span>
+                </li>
                 <li class="col col-md text-center">
                     <button type="button" 
                         @click="getOne(item.id)"
                         class="btn default"><i class="fa-solid fa-pen-to-square"></i></button>
-                    <button type="button" 
+                    <button :disabled="item.status === true" type="button" 
                         class="btn text-danger bg-trash mx-1"
-                        @click="deleteCategorie(item.id)"
                     ><i class="fa-solid fa-trash"></i></button>
                 </li>
             </ul>
-            <div class="d-flex justify-content-center pt-5">
-                <b-spinner v-if="!useCategorie?.categories.length" variant="primary" label="Spinning"></b-spinner>
+            <div v-if="!useCategorie?.categories.length" class="d-flex justify-content-center pt-5">
+                <b-spinner variant="primary" label="Spinning"></b-spinner>
             </div>
         </div>
         <b-modal v-model="modalShow" hide-footer title="Nouvelle Categorie" hide-header-close centered>

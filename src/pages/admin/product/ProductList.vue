@@ -3,9 +3,12 @@
         <div class="default px-3">
             <div class="d-flex justify-content-between my-3">
                 <h4>Produits</h4>
-                <div class="d-flex gap-1 align-items-center">
-                    <button @click="modalShow = true" class="btn bg-primary text-white">+ Produit</button>
-                    <b-nav-item-dropdown text="Categorie" right class="list-none btn border border-primary">
+                <div class="row gap-1 align-items-center">
+                    <div class="col-md-6">
+                        <input @change="useFilter(useProduit.products, search)" v-model="search" type="text" placeholder="recherchez un produit" class="form-control">
+                    </div>
+                    <button @click="modalShow = true" class="btn bg-primary col text-white">+ Produit</button>
+                    <b-nav-item-dropdown text="Categorie" right class="col list-none btn border border-primary">
                         <b-dropdown-item href="#">
                             <router-link exact :to="{ name: 'list-categories' }">                           
                                 <span class="">Plus de categories</span>                             
@@ -24,11 +27,14 @@
                 <li class="col-md">Prix</li>
                 <li class="col-md text-center">Action</li>
             </ul>
-            <ul class="row default align-items-center default py-2 rounded bg-white list-none p-0 m-0">
+            <ul 
+                v-if="useProduit?.products.length"
+                v-for="(item, index) in paginateProduct" :key="index"
+                class="row default align-items-center default py-2 rounded bg-white list-none p-0 mx-0 mb-1">
                 <li class="col-md-2"><img src="" alt=""></li>
-                <li class="col-md">Produit 1</li>
-                <li class="col-md">PR1A23</li>
-                <li class="col-md">400cfa</li>
+                <li class="col-md">{{ item.nomproduit }}</li>
+                <li class="col-md">{{ item.codeProduit }}</li>
+                <li class="col-md">{{ item.prixproduit }}cfa</li>
                 <li class="col-md text-center">
                     <button class="btn default"><i class="fa-solid fa-pen-to-square"></i></button>
                     <button 
@@ -36,6 +42,16 @@
                         class="btn text-danger bg-trash mx-1"><i class="fa-solid fa-trash"></i></button>
                 </li>
             </ul>
+            <div class="">
+                <b-pagination
+                    v-model="currentPage"
+                    :total-rows="rows"
+                    :per-page="perPage"
+                ></b-pagination>
+            </div>
+            <div v-if="!useProduit?.products.length" class="d-flex justify-content-center pt-5">
+                <b-spinner variant="primary" label="Spinning"></b-spinner>
+            </div>
         </div>
         <b-modal v-model="modalShow" hide-footer title="Nouveau Produit" hide-header-close centered>
             <form action="" class="default">
@@ -84,14 +100,32 @@
 import { ref, reactive, computed, onMounted } from "vue"
 import { useVuelidate } from '@vuelidate/core'
 import { required } from '@vuelidate/validators'
+import { useFilter } from '../../../_utils/useFilter'
 import VueMultiselect from 'vue-multiselect'
-import { useCategorieStore } from "../../../_store"
-import { useProductsStore } from "../../../_store"
+import { useCategorieStore, useProductsStore } from "../../../_store"
 
 import Swal from 'sweetalert2'
 
 const useCategorie = useCategorieStore()
 const useProduit = useProductsStore()
+
+const search = ref("")
+
+const rows =  computed(() => {
+    return useProduit.products?.length
+});
+let perPage = ref(2);
+let currentPage = ref(1);
+
+const paginateProduct = computed(() => {
+    let start = (currentPage.value - 1) * perPage.value;
+    let end = currentPage.value * perPage.value;
+    return useProduit.products.slice(start, end);
+});
+
+const goToPage = (page) => {
+    currentPage.value = page;
+}
 
 const state = reactive({
     categorie: {},
