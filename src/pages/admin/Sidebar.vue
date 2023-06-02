@@ -26,16 +26,16 @@
                     </li>
                     <ul class="menu-links p-0">
                         <li class="nav-link">
-                            <router-link :to="{ name: 'dashboard' }" href="#">
+                            <router-link exact :to="{ name: 'dashboard' }">
                                 <i class="fa-solid fa-house icon"></i>
                                 <span class="text nav-text">Dashboard</span>                             
                             </router-link>
                         </li>
                         <li class="nav-link">
-                            <a href="#">
+                            <router-link exact :to="{ name: 'list-produits' }">
                                 <i class="fa-solid fa-list icon"></i>                            
                                 <span class="text nav-text">Produits</span>                             
-                            </a>
+                            </router-link>
                         </li>
                         <li class="nav-link">
                             <a href="#">

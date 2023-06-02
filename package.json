@@ -14,11 +14,15 @@
     "axios": "^1.4.0",
     "bootstrap": "^5.2.3",
     "bootstrap-vue-next": "^0.8.11",
-    "chart.js": "^4.3.0",
+    "chart.js": "^3.9.1",
     "pinia": "^2.0.36",
     "pinia-plugin-persistedstate": "^3.1.0",
+    "sweetalert2": "^11.7.10",
     "vue": "^3.2.47",
+    "vue-chart-3": "^3.1.8",
+    "vue-multiselect": "^3.0.0-beta.2",
     "vue-router": "^4.2.0",
+    "vue-sweetalert2": "^5.0.5",
     "zipson": "^0.2.12"
   },
   "devDependencies": {

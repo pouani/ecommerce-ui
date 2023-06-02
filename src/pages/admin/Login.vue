@@ -1,9 +1,7 @@
 <template lang="">
-    <div class="default">
-        <button @click="modalShow = !modalShow" class="btn bg-gray-200 rounded-32"><i class="fa-solid fa-user mx-1"></i>Connexion</button>
-
-        <b-modal v-model="modalShow" hide-footer title="Se connecter" hide-header-close centered>
-            <form action="" class="default">
+    <div class="h-screen">
+        <div class="d-flex justify-content-center align-items-center h-100">
+            <form action="" class="card p-4" style="max-width: 25rem; width: 100%;">
                 <div class="mb-3">
                     <div class="border d-flex align-items-center rounded overflow-hidden">
                         <input v-model="state.email" type="email" placeholder="votre email" class="py-2 w-100 px-2 border-0">
@@ -25,9 +23,6 @@
                         Veillez fournir le mot de passe
                     </em>
                 </div>
-                <div class="mb-3">
-                    <a href="#" class="">J'ai pas de compte ?</a>
-                </div>
                 <div>
                     <button
                         type="button" 
@@ -35,7 +30,7 @@
                         class="btn btn-primary w-100">Je me connecte</button>
                 </div>
             </form>
-        </b-modal>
+        </div>
     </div>
 </template>
 <script setup>
@@ -43,12 +38,12 @@ import { ref, reactive, computed } from "vue"
 import {useRouter, useRoute } from 'vue-router';
 import { useVuelidate } from '@vuelidate/core'
 import { required, email, minLength } from '@vuelidate/validators'
+import { useAuthStore } from '../../_store'
 
+
+const auth = useAuthStore();
 
 const router = useRouter();
-console.log(router)
-
-const modalShow = ref(false)
 
 const state = reactive({
     email: '',
@@ -69,10 +64,7 @@ const statePass = ref(true)
 const submit = () => {
     v$.value.$validate()
     if(!v$.value.$error){
-        console.log(state)
-        modalShow.value = false
-        localStorage.setItem('token', 'arisse')
-        router.push({ name: 'admin' })
+        auth.login(state)
     }else{
         console.log(v$.value)
     }

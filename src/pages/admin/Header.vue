@@ -4,7 +4,7 @@
             <li class="list-none">
                 <i class="fa-regular fa-bell"></i>
             </li>
-            <b-nav-item-dropdown text="Arisse" right class="list-none">
+            <b-nav-item-dropdown :text="auth?.user?.name" right class="list-none">
                 <b-dropdown-item href="#">Profile</b-dropdown-item>
                 <b-dropdown-item href="#" class="text-danger">Se deconnecter</b-dropdown-item>
                 <b-dropdown-item href="#">Administrateur</b-dropdown-item>
@@ -13,4 +13,14 @@
     </div>
 </template>
 <script setup>
+import { ref, computed, onMounted } from 'vue';
+import { useAuthStore } from '../../_store'
+
+const auth = useAuthStore();
+
+onMounted(() => {
+    if(auth.isAuthenticated){
+        auth.setUser()
+    }
+})
 </script>

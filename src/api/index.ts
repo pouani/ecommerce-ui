@@ -21,7 +21,6 @@ Axios.interceptors.request.use((request: any) => {
     if(Account.isLogged()){
         request.headers.Authorization = 'Bearer '+Account.getToken();
     }
-
     return request;
 })
 
@@ -44,3 +43,5 @@ Axios.interceptors.response.use((response : AxiosResponse<any, any>) => {
         }
     }
 })
+
+export default Axios;

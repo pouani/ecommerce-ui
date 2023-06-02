@@ -47,8 +47,23 @@ const routes: Array<RouteRecordRaw> = [
                 name: 'dashboard',
                 component: () => import('../pages/admin/dashboard/Dashboard.vue'),
             },
+            {
+                path: '/produits',
+                name: 'list-produits',
+                component: () => import('../pages/admin/product/ProductList.vue'),
+            },
+            {
+                path: '/categories',
+                name: 'list-categories',
+                component: () => import('../pages/admin/product/CategorieList.vue'),
+            }
         ],
     },
+    {
+        path: '/login',
+        name: 'login',
+        component: () => import('../pages/admin/Login.vue'),
+    }
 ];
 
 const router = createRouter({
@@ -59,7 +74,6 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
     if(to.matched[0].name == 'admin') {
-        console.log(to.matched[0].name)
         authGuard(to);
     }
     next();

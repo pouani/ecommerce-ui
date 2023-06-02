@@ -1,4 +1,4 @@
-import Axios from "@/api"
+import Axios from "../api"
 class Account {
     //fonction de connection
      login = (credentials : {} | string) => {
@@ -7,28 +7,28 @@ class Account {
     
     //fonction de deconnection, ici on supprime tout simplement le token du localstorage
     logout = () => {
-        localStorage.removeItem('token')
+        localStorage.removeItem('acess-token')
         localStorage.clear()
     }
 
     // récupération de l'utilisateur connecté
     setUser = () => {
-        return Axios.get('')
+        return Axios.get('auth/current')
     }
 
     //stockage du token
     saveToken = (token: string) => {
-        localStorage.setItem('ms-token', token)
+        localStorage.setItem('acess-token', token)
     }
 
     //on recupere le token
     getToken = () => {
-        return localStorage.getItem('ms-token')
+        return localStorage.getItem('acess-token')
     }
 
     //methode qui determine si on est connectee ou pas
     isLogged = () => {
-        const token = localStorage.getItem('ms-token')
+        const token = localStorage.getItem('acess-token')
         return !!token
     }
 }

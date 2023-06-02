@@ -5,10 +5,10 @@
 import router from "../_routes"
 
 export function authGuard(to: any){
-    let token = localStorage.getItem('token');
+    let token = localStorage.getItem('acess-token');
 
     if(token){
         return true;
     }
-    router.push('/');
+    router.push('/login');
 }

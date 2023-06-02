@@ -19,6 +19,7 @@ body{
 .public{
     background-color: var(--body-color) !important;
     &-layout{
+        padding-top: 4rem;
         padding: 8px 16px;
     }
     color: $default;
@@ -461,12 +462,12 @@ header .image-text .header-text{
     background-color: var(--primary-color);
 }
 
-.sidebar .active{
+.sidebar .active.router-link-exact-active{
     background-color: var(--primary-color);
 }
 
-.sidebar .active .icon,
-.sidebar .active .text{
+.sidebar .active.router-link-exact-active .icon,
+.sidebar .active.router-link-exact-active .text{
     color: var(--sidebar-color) !important;
 }
 
