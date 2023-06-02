@@ -6,7 +6,7 @@
             </li>
             <b-nav-item-dropdown :text="auth?.user?.name" right class="list-none">
                 <b-dropdown-item href="#">Profile</b-dropdown-item>
-                <b-dropdown-item href="#" class="text-danger">Se deconnecter</b-dropdown-item>
+                <b-dropdown-item @click="auth.logout()" href="#" class="text-danger">Se deconnecter</b-dropdown-item>
                 <b-dropdown-item href="#">Administrateur</b-dropdown-item>
             </b-nav-item-dropdown>
         </div>
