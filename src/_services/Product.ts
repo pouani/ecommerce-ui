@@ -16,7 +16,7 @@ class Product
     path: string;
 
     constructor(){
-        this.path = "/produits"
+        this.path = "/products"
     }
 
     async fetchAllProduits(): Promise<Products> {

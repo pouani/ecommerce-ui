@@ -86,10 +86,12 @@ import { useVuelidate } from '@vuelidate/core'
 import { required } from '@vuelidate/validators'
 import VueMultiselect from 'vue-multiselect'
 import { useCategorieStore } from "../../../_store"
+import { useProductsStore } from "../../../_store"
 
 import Swal from 'sweetalert2'
 
 const useCategorie = useCategorieStore()
+const useProduit = useProductsStore()
 
 const state = reactive({
     categorie: {},
@@ -143,6 +145,7 @@ const deleteProduct = () => {
 
 onMounted(() =>{
     useCategorie.getAllCategories()
+    useProduit.getAllProducts();
 })
 
 </script>

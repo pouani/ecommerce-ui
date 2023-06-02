@@ -36,6 +36,13 @@ export const useAuthStore = defineStore({
             }).catch((err: any) => {
                 console.log(err);
             })
+        },
+
+        async logout(){
+            Account.logout()
+            if(localStorage.getItem('acess-token') == null){
+                router.push('/login')
+            }
         }
     },
     persist: true,

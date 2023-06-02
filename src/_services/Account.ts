@@ -8,7 +8,6 @@ class Account {
     //fonction de deconnection, ici on supprime tout simplement le token du localstorage
     logout = () => {
         localStorage.removeItem('acess-token')
-        localStorage.clear()
     }
 
     // récupération de l'utilisateur connecté
