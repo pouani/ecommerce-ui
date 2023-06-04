@@ -19,7 +19,7 @@ body{
 .public{
     background-color: var(--body-color) !important;
     &-layout{
-        padding-top: 4rem;
+        padding-top: 7rem !important;
         padding: 8px 16px;
     }
     color: $default;

@@ -68,25 +68,29 @@
                     </VueMultiselect>
                 </div>
                 <div class="form-group mb-2">
-                    <label for="nom">Designation</label>
+                    <label for="nom" class="form-label">Designation</label>
                     <input v-model="state.designation" type="text" class="form-control">
                     <em v-if="v$.designation.$error" class="text-end text-danger list-none">
                         Veillez fournir la designation
                     </em>
                 </div>
                 <div class="form-group mb-2">
-                    <label for="nom">Description</label>
+                    <label for="nom" class="form-label">Description</label>
                     <textarea v-model="state.description" name="" id="" cols="15" rows="5" class="form-control"></textarea>
                     <em v-if="v$.description.$error" class="text-end text-danger list-none">
                         Veillez fournir la description
                     </em>
                 </div>
                 <div class="form-group mb-2">
-                    <label for="prix">Prix</label>
+                    <label for="prix" class="form-label">Prix</label>
                     <input v-model="state.prix" type="number" class="form-control">
                     <em v-if="v$.prix.$error" class="text-end text-danger list-none">
                         Veillez fournir le prix
                     </em>
+                </div>
+                <div class="mb-2">
+                    <label for="formFile" class="form-label">Image</label>
+                    <input @change="handleFileInputChange" class="form-control" type="file" id="formFile">
                 </div>
                 <button 
                     type="button" class="btn btn-primary w-100"
@@ -114,7 +118,7 @@ const search = ref("")
 const rows =  computed(() => {
     return useProduit.products?.length
 });
-let perPage = ref(2);
+let perPage = ref(5);
 let currentPage = ref(1);
 
 const paginateProduct = computed(() => {
@@ -127,12 +131,25 @@ const goToPage = (page) => {
     currentPage.value = page;
 }
 
+
 const state = reactive({
     categorie: {},
     designation: '',
     description: '',
     prix: 1,
+    photo: null
 });
+
+const handleFileInputChange = (e) => {
+    const file = e.target.files[0]
+    state.photo =  file;
+    const reader = new FileReader();
+    reader.onload = () => {
+        state.photo = Array.from(new Uint8Array(reader.result));
+    };
+    console.log(state.photo)
+    reader.readAsArrayBuffer(file);
+}
 
 const rules = computed(() => {
     return {
@@ -150,8 +167,9 @@ const modalShow = ref(false)
 const submit = () => {
     v$.value.$validate()
     if(!v$.value.$error){
-        console.log(state)
-        modalShow.value = false
+        useProduit.createProduct(state).then(() => {
+            modalShow.value = false
+        })
     }else{
         console.log(v$.value)
     }

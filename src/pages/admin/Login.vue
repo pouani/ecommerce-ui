@@ -4,7 +4,7 @@
             <form action="" class="card p-4" style="max-width: 25rem; width: 100%;">
                 <div class="mb-3">
                     <div class="border d-flex align-items-center rounded overflow-hidden">
-                        <input v-model="state.email" type="email" placeholder="votre email" class="py-2 w-100 px-2 border-0">
+                        <input v-model="state.email" type="email" placeholder="votre email" class="py-2 w-100 outline-none px-2 border-0">
                         <i class="fa-solid fa-envelope mx-2"></i>
                     </div>
                     <em v-if="v$.email.$error" class="text-end text-danger list-none mb-5">
@@ -13,7 +13,7 @@
                 </div>
                 <div class="mb-2">
                     <div class="border d-flex align-items-center rounded overflow-hidden">
-                        <input v-model="state.password" :type="typePass" placeholder="votre mot de passe" class="py-2 w-100 px-2 border-0">
+                        <input v-model="state.password" :type="typePass" placeholder="votre mot de passe" class="py-2 w-100 outline-none px-2 border-0">
                         <i @click="changeType" :class="statePass ? 'fa-eye-slash' : 'fa-sharp fa-eye'" class="fa-solid fi cursor-pointer mx-2"></i>
                     </div>
                     <em v-if="v$.password.minLength.$invalid" class="text-end text-danger list-none">
@@ -27,7 +27,10 @@
                     <button
                         type="button" 
                         @click="submit"
-                        class="btn btn-primary w-100">Je me connecte</button>
+                        class="btn btn-primary w-100">
+                        <span v-if="!auth.loading">Je me connecte</span>
+                        <b-spinner v-if="auth.loading" variant="info" label="Spinning"></b-spinner>
+                    </button>
                 </div>
             </form>
         </div>

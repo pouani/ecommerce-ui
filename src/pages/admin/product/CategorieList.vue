@@ -36,7 +36,8 @@
                     <button type="button" 
                         @click="getOne(item.id)"
                         class="btn default"><i class="fa-solid fa-pen-to-square"></i></button>
-                    <button :disabled="item.status === true" type="button" 
+                    <button :disabled="item.status == true" type="button"
+                        @click="deleteCategorie(item.id)"
                         class="btn text-danger bg-trash mx-1"
                     ><i class="fa-solid fa-trash"></i></button>
                 </li>

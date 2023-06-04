@@ -24,8 +24,8 @@
                 class="col-6 col-md-3 p-1" 
                 v-for="item in useProducts.products" :key="index" 
                 :productImage="item.image"
-                :productName="item.name"
-                :productPrice="item.price"
+                :productName="item.nomproduit"
+                :productPrice="item.prixproduit"
                 :productDesciption="useTruncate(item.description, 20)"
                 :product="item"
             />
@@ -37,10 +37,15 @@
     </div>
 </template>
 <script setup>
+import { onMounted } from 'vue'
 import CardItems from "./views/CardItems.vue"
 import { useTruncate } from "../../_utils/useTruncate"
 
-import { useProductsStore } from '../../_store/products'
+import { useProductsStore } from '../../_store'
 
 const useProducts = useProductsStore();
+
+onMounted(() => {
+    useProducts.getAllProducts()
+})
 </script>

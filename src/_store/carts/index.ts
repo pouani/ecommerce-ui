@@ -18,7 +18,7 @@ export const useCartStore = defineStore({
             return this.cartQuantity = this.cart.reduce((acc, item) => acc + item.quantity, 0);
         },
         getCartTotalPrice(): Number {
-            return this.cartTotalPrice = this.cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
+            return this.cartTotalPrice = this.cart.reduce((acc, item) => acc + item.prixproduit * item.quantity, 0);
         }
     },
     actions: {

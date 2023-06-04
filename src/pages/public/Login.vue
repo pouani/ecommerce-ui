@@ -31,7 +31,7 @@
                 <div>
                     <button
                         type="button" 
-                        @click="submit"
+                        @click="submit()"
                         class="btn btn-primary w-100">Je me connecte</button>
                 </div>
             </form>
@@ -39,10 +39,13 @@
     </div>
 </template>
 <script setup>
-import { ref, reactive, computed } from "vue"
+import { ref, reactive, computed, onMounted } from "vue"
 import {useRouter, useRoute } from 'vue-router';
 import { useVuelidate } from '@vuelidate/core'
 import { required, email, minLength } from '@vuelidate/validators'
+import { useClientStore } from '../../_store'
+
+const useClient = useClientStore();
 
 
 const router = useRouter();
@@ -69,10 +72,9 @@ const statePass = ref(true)
 const submit = () => {
     v$.value.$validate()
     if(!v$.value.$error){
-        console.log(state)
-        modalShow.value = false
-        localStorage.setItem('token', 'arisse')
-        router.push({ name: 'admin' })
+        useClient.login(state).then(() => {
+            modalShow.value = false
+        })
     }else{
         console.log(v$.value)
     }

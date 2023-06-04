@@ -1,5 +1,5 @@
 <template lang="">
-    <div class="order-summary">
+    <div class="order-summary border-l-dashed px-1">
         <h4>Détails commande</h4>
         <div class="mt-4">
             <ul class="p-0 border-bottom">
@@ -25,7 +25,7 @@
                         <div class="col-2 rounded hidden">
                             <img :src="item.image" alt="">
                         </div>
-                        <p class="col-3 text-center m-0 mt-2">{{ item.name }}</p>
+                        <p class="col-3 text-center m-0 mt-2">{{ item.nomproduit }}</p>
                         <div class="col-4 text-center">
                             <div class="d-flex border rounded-32">
                                 <button class="btn">-</button>
@@ -33,23 +33,23 @@
                                 <button class="btn">+</button>
                             </div>
                         </div>
-                        <p class="col-3 text-center mb-0 mt-2">{{ item.price }}</p>
+                        <p class="col-3 text-center mb-0 mt-2">{{ item.prixproduit }}</p>
                       
                     </li>
                 </ul>
             </div>
             <ul class="list-none p-0">
                 <li class="d-flex justify-content-between mb-3">
-                    <h5>Total Produit</h5>
+                    <h6>Total Produit</h6>
                     <h5>{{ totalQuantity }}</h5>
                 </li>
                 <li class="d-flex justify-content-between mb-3">
-                    <h5>Total Prix</h5>
+                    <h6>Total Prix</h6>
                     <h5>{{ totalPrice }} cfa</h5>
                 </li>
                 <li class="d-flex justify-content-between mb-3">
-                    <h5>Livraison</h5>
-                    <p>Gratuite</p>
+                    <h6 class="gray-600">Livraison</h6>
+                    <p class="gray-600">Gratuite</p>
                 </li>
             </ul>
         </div>

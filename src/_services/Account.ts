@@ -4,6 +4,18 @@ class Account {
      login = (credentials : {} | string) => {
         return Axios.post('auth/authenticate', credentials)
     }
+
+    loginClient = (credentials : {} | string) => {
+        return Axios.post('auth/client/login', credentials)
+    }
+
+    registerClient = (credentials : {} | string) => {
+        return Axios.post('auth/client/register', credentials)
+    }
+
+    logoutClient = () => {
+        localStorage.removeItem('client-token')
+    }
     
     //fonction de deconnection, ici on supprime tout simplement le token du localstorage
     logout = () => {

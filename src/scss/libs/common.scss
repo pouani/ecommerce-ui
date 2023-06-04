@@ -137,3 +137,15 @@
 .bg-success{
     --bs-bg-opacity: .5 !important;
 }
+
+.outline-none{
+    outline: none;
+}
+
+.border-r-dashed{
+    border-right: 1px dashed $gray-500;
+}
+
+.border-l-dashed{
+    border-left: 1px dashed $gray-500;
+}

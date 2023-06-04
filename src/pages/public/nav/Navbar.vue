@@ -15,10 +15,11 @@
                         </router-link>
                         <li>
                             <b-nav-item-dropdown text="Categorie" right>
-                                <b-dropdown-item href="#">Categorie 1</b-dropdown-item>
-                                <b-dropdown-item href="#">Categorie 1</b-dropdown-item>
-                                <b-dropdown-item href="#">Categorie 1</b-dropdown-item>
-                                <b-dropdown-item href="#">Categorie 1</b-dropdown-item>
+                                <b-dropdown-item href="#" v-for="(item, index) in useCategorie.categories" :key="index">
+                                    <router-link :to="{name: 'categorie-product', params: { id: item.id } }">
+                                        {{item.nomCategorie}}
+                                    </router-link>
+                                </b-dropdown-item>
                             </b-nav-item-dropdown>
                         </li>
                         <router-link exact class="h-content" :to="{ name: 'all-product' }">
@@ -26,12 +27,11 @@
                         </router-link>
                         <!-- <router-link class="h-content" :to="{ name: 'all-product' }">
                             Produits
-                        </router-link>
-                        <router-link class="h-content" :to="{ name: 'all-product' }">
-                            Produits
                         </router-link> -->
                         <li class="h-content" href="#">Livraison</li>
-                        <li class="h-content" href="#">Contact</li>
+                        <router-link class="h-content" :to="{ name: 'contact' }">
+                            Contact
+                        </router-link>
                     </ul>
 
                     <!-- Right aligned nav items -->
@@ -62,9 +62,16 @@
 import Login from '../Login.vue'
 import { ref, computed, onMounted } from 'vue'
 import { useCartStore } from '../../../_store/carts'
+import { useCategorieStore } from '../../../_store'
+
+const useCategorie = useCategorieStore()
 
 const useCart = useCartStore()
 
 const quantity = ref(0)
 quantity.value = computed(() => useCart.getCartQuantity)
+
+onMounted(() => {
+    useCategorie.getAllCategories()
+})
 </script>

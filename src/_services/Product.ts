@@ -23,6 +23,10 @@ class Product
         return await Axios.get(`${this.path}/all`);
     }
 
+    async fetchAllProductsCategorie(id: number): Promise<Products>{
+        return await Axios.get(`${this.path}/${id}/all`);
+    }
+
     async fetchOneProduit(id: number): Promise<Products> {
         return await Axios.get(`${this.path}/${id}`);
     }

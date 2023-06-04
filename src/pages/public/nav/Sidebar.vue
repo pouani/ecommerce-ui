@@ -9,11 +9,11 @@
             v-for="(item, index) in useCart.cart" :key="item.index"
             class="px-3 py-2 mt-3 d-flex justify-content-between border-top">
             <div class="cart-img rounded">
-                <img :src="item.image" alt="">
+                <img :src="item?.image" alt="">
             </div>
             <div>
-                <h6>{{ item.quantity + ' - '}}{{ item.name }}</h6>
-                <p>{{ item.price }}</p>
+                <h6>{{ item.quantity + ' - '}}{{ item.nomproduit }}</h6>
+                <p>{{ item.prixproduit }}</p>
             </div>
             <i 
                 @click="useCart.removeFromCart(item)"

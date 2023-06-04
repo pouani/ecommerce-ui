@@ -45,8 +45,10 @@
                         </li>
                         <li class="nav-link">
                             <a href="#">
+                            <router-link exact :to="{ name: 'list-clients' }">
                                 <i class="fa-solid fa-users icon"></i>                                                          
-                                <span class="text nav-text">Clients</span>                             
+                                <span class="text nav-text">Clients</span>                           
+                            </router-link>                             
                             </a>
                         </li>
                         <li class="nav-link">

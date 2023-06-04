@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 
 //fichier de vérification et récupération du token d'existance du token
-import { authGuard } from '../_middleware';
+import { authGuard, clientGuard } from '../_middleware';
 
 
 const routes: Array<RouteRecordRaw> = [
@@ -27,9 +27,25 @@ const routes: Array<RouteRecordRaw> = [
                 props: true,
             },
             {
+                path: '/categorie/:id',
+                name: 'categorie-product',
+                component: () => import('../pages/public/views/ListProductCategorie.vue'),
+                props: true,
+            },
+            {
                 path: '/commande',
                 name: 'commande',
                 component: () => import('../pages/public/Order.vue'),
+            },
+            {
+                path: '/suivicommade',
+                name: 'suivi-commande',
+                component: () => import('../pages/public/CommandeClient.vue'),
+            },
+            {
+                path: '/contact',
+                name: 'contact',
+                component: () => import('../pages/public/Contact.vue')
             },
             {
                 path: "/:pathMatch(.*)", redirect: "/"
@@ -56,6 +72,14 @@ const routes: Array<RouteRecordRaw> = [
                 path: '/categories',
                 name: 'list-categories',
                 component: () => import('../pages/admin/product/CategorieList.vue'),
+            },
+            {
+                path: "/clients",
+                name: "list-clients",
+                component: () => import("../pages/admin/client/ClientList.vue"),
+            },
+            {
+                path: "/:pathMatch(.*)", redirect: "/login"
             }
         ],
     },
@@ -75,6 +99,14 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
     if(to.matched[0].name == 'admin') {
         authGuard(to);
+    }
+    next();
+});
+
+router.beforeEach((to, from, next) => {
+    console.log(to)
+    if(to.matched.length > 1 && to.matched[1].name == 'suivi-commande') {
+        clientGuard(to);
     }
     next();
 });

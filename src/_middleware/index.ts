@@ -12,3 +12,12 @@ export function authGuard(to: any){
     }
     router.push('/login');
 }
+
+export function clientGuard(to: any){
+    let token = localStorage.getItem('client-token');
+
+    if(token){
+        return true;
+    }
+    router.push('/');
+}

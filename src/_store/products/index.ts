@@ -5,7 +5,8 @@ export const useProductsStore = defineStore({
     id: 'products',
     state: () => ({
         products: [] as any,
-        product: {} as any
+        product: {} as any,
+        productsCategories: [] as any,
     }),
 
     getters: {
@@ -27,20 +28,30 @@ export const useProductsStore = defineStore({
             });
         },
 
+        //get All products categorie
+        async getAllProductsCategorie(id: number) {
+            await Product.fetchAllProductsCategorie(id).then((res: any) => {
+                this.productsCategories = res.data
+            }).catch((err: any) => {
+                console.log(err)
+            })
+        },
+
         //get one products by id
         async getProductById(id: number) {
-        //    this.products.find((product: any) => product.id == id);
-           this.product = this.products.find((product: any) => product.id == id);
-           console.log(this.product)
-           return this.product;
+            await Product.fetchOneProduit(id).then((res: any) => {
+                this.product = res.data
+            }).catch((err: any) => {
+                console.log(err)
+            })
         },
 
         async createProduct(data: {} | any){
             const requestData = {
-                categorie: data.categorie,
+                categorie: { id: data.categorie.id },
                 nomproduit: data.designation,
                 prixproduit: data.prix,
-                codeProduit: "",
+                photo: data.photo,
             }
             await Product.createProduit(requestData).then((res: {} | any)=> {
                 this.products.push(res.data)
