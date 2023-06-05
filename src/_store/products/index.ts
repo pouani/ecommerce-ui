@@ -51,8 +51,10 @@ export const useProductsStore = defineStore({
                 categorie: { id: data.categorie.id },
                 nomproduit: data.designation,
                 prixproduit: data.prix,
-                photo: data.photo,
+                photoBytes: data.photo,
+                extension: data.extension,
             }
+            console.log(requestData)
             await Product.createProduit(requestData).then((res: {} | any)=> {
                 this.products.push(res.data)
             }).catch((error) => {

@@ -79,6 +79,11 @@ const routes: Array<RouteRecordRaw> = [
                 component: () => import("../pages/admin/client/ClientList.vue"),
             },
             {
+                path: "/commandes",
+                name: "list-commandes",
+                component: () => import("../pages/admin/commande/CommandeList.vue"),
+            },
+            {
                 path: "/:pathMatch(.*)", redirect: "/login"
             }
         ],

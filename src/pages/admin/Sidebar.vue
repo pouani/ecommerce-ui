@@ -38,18 +38,16 @@
                             </router-link>
                         </li>
                         <li class="nav-link">
-                            <a href="#">
+                            <router-link  exact :to="{ name: 'list-commandes' }">
                                 <i class="fa-solid fa-list-ul icon"></i>                                                         
                                 <span class="text nav-text">Commandes</span>                             
-                            </a>
+                            </router-link>
                         </li>
                         <li class="nav-link">
-                            <a href="#">
                             <router-link exact :to="{ name: 'list-clients' }">
                                 <i class="fa-solid fa-users icon"></i>                                                          
                                 <span class="text nav-text">Clients</span>                           
-                            </router-link>                             
-                            </a>
+                            </router-link>
                         </li>
                         <li class="nav-link">
                             <a href="#">
