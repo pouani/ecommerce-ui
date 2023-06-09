@@ -38,7 +38,7 @@
                 <li class="col-md text-center">
                     <button class="btn default"><i class="fa-solid fa-pen-to-square"></i></button>
                     <button 
-                        @click="deleteProduct()"
+                        @click="deleteProduct(item.id)"
                         class="btn text-danger bg-trash mx-1"><i class="fa-solid fa-trash"></i></button>
                 </li>
             </ul>
@@ -118,7 +118,7 @@ const search = ref("")
 const rows =  computed(() => {
     return useProduit.products?.length
 });
-let perPage = ref(5);
+let perPage = ref(8);
 let currentPage = ref(1);
 
 const paginateProduct = computed(() => {
@@ -138,18 +138,19 @@ const state = reactive({
     description: '',
     prix: 1,
     photo: null,
+    photoBytes: null,
     extension: '',
 });
 
 const handleFileInputChange = (e) => {
     const file = e.target.files[0]
-    state.photo =  file;
+    state.photoBytes =  file;
     const reader = new FileReader();
     reader.onload = () => {
-        state.photo = Array.from(new Uint8Array(reader.result));
+        state.photoBytes = reader.result;
         state.extension = file.name.split('.').pop();
         console.log("extension == ", state.extension)
-        console.log("photo == ",state.photo)
+        console.log("photo == ",state.photoBytes)
     };
     reader.readAsArrayBuffer(file);
 }
@@ -178,7 +179,7 @@ const submit = () => {
     }
 }
 
-const deleteProduct = () => {
+const deleteProduct = (id) => {
     Swal.fire({
         title: 'Etes vous sur?',
         text: "Vous ne pouvez plus revenir en arriere!",
@@ -189,6 +190,7 @@ const deleteProduct = () => {
         confirmButtonText: "Oui, supprimer!"
     }).then((result) => {
     if (result.isConfirmed) {
+        useProduit.deleteProduit(id)
         Swal.fire(
         'Spprimer!',
         'Votre produit a ete supprimer.',

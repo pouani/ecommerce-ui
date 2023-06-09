@@ -51,8 +51,7 @@ export const useProductsStore = defineStore({
                 categorie: { id: data.categorie.id },
                 nomproduit: data.designation,
                 prixproduit: data.prix,
-                photoBytes: data.photo,
-                extension: data.extension,
+                photo: "",
             }
             console.log(requestData)
             await Product.createProduit(requestData).then((res: {} | any)=> {
