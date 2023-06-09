@@ -61,6 +61,18 @@ export const useProductsStore = defineStore({
             })
         },
 
+        async createPhoto(data: {} | any){
+            const requestPhoto = {
+                id: data.id,
+                file: data.file
+            }
+            await Product.createPhotoImage(requestPhoto).then((res: any) => {
+                console.log(res)
+            }).catch((err: any) => {
+                console.log(err)
+            })
+        },
+
         async deleteProduit(produit: any){
             await Product.deleteProduit(produit).then((res: any) => {
                 this.products = this.products.filter((item: any) => item.id != produit)

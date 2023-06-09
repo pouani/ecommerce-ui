@@ -25,11 +25,25 @@ export const useClientStore = defineStore({
                 this.loading = false;
                 if(res.data.accessToken){
                     this.token = localStorage.getItem('client-token');
+                    this.client = res.data.userDetails;
                     router.push('/suivicommade')
                 }
             }).catch((err: any) => {
                 this.loading = false;
                 console.log(err)
+            })
+        },
+
+        async register(state: {}){
+            this.loading = true;
+            await Account.registerClient(state).then((res: any) => {
+                localStorage.setItem('client-token', res.data.accessToken)
+                this.loading = false;
+                if(res.data.accessToken){
+                    this.token = localStorage.getItem('client-token');
+                    this.client = res.data.userDetails;
+                    router.push('/commande')
+                }
             })
         },
 
@@ -41,5 +55,6 @@ export const useClientStore = defineStore({
             })
         }
 
-    }
+    },
+    persist: true
 });

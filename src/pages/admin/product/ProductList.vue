@@ -138,8 +138,6 @@ const state = reactive({
     description: '',
     prix: 1,
     photo: null,
-    photoBytes: null,
-    extension: '',
 });
 
 const handleFileInputChange = (e) => {
@@ -147,11 +145,11 @@ const handleFileInputChange = (e) => {
     state.photoBytes =  file;
     const reader = new FileReader();
     reader.onload = () => {
-        state.photoBytes = reader.result;
-        state.extension = file.name.split('.').pop();
-        console.log("extension == ", state.extension)
-        console.log("photo == ",state.photoBytes)
+        state.photo = Array.from(new Uint8Array(reader.result));
+        // state.extension = file.name.split('.').pop();
+        // console.log("photo == ",state.photo)
     };
+    console.log("photo == ",state.photo)
     reader.readAsArrayBuffer(file);
 }
 

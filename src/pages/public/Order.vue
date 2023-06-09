@@ -6,7 +6,7 @@
             :validations="validation"
         >
             <template #step1>
-                <form>
+                <form v-if="useClient.token == null ">
                     <div class="mb-3">
                         <label for="email">Adresse email</label>
                         <input type="email" id="email" placeholder="email@gmail.com" class="form-control">
@@ -19,10 +19,22 @@
                         </div>
                     </div>
                     <div class="mb-3 text-end">
-                        <button class="btn">S'enregistrer pour un compte</button>
+                        <router-link :to="{name: 'register'}" class="btn">S'enregistrer pour un compte</router-link>
                         <button class="btn btn-primary rounded-32">Se connecter</button>
                     </div>
                 </form>
+                <div class="info" v-if="useClient.token != null">
+                    <ul class="list-none p-0">
+                        <li class="d-flex justify-content-between">
+                            <p>Email : </p>
+                            <p class="fwb">{{useClient.client.username}}</p>
+                        </li>
+                        <li class="d-flex justify-content-between">
+                            <p>Nom : </p>
+                            <p class="fwb">{{useClient.client.name}}</p>
+                        </li>
+                    </ul>
+                </div>
             </template>
             <template #step2>
                 <div>
@@ -68,6 +80,11 @@
 import Stepper from '../../components/Stepper.vue'
 import OrderSummary from './views/OrderSummary.vue'
 import { reactive, ref } from 'vue'
+
+import { useClientStore } from '../../_store'
+
+
+const useClient = useClientStore();
 
 const steps = reactive([
     { title: 'Compte', slotName: 'step1' },

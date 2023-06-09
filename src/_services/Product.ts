@@ -16,9 +16,11 @@ class Product
 {
 
     path: string;
+    pathPhoto: string;
 
     constructor(){
         this.path = "/products"
+        this.pathPhoto = "/photos"
     }
 
     async fetchAllProduits(): Promise<Products> {
@@ -39,6 +41,10 @@ class Product
 
     async createProduit(data: Products | any): Promise<Products> {
         return await Axios.post(`${this.path}/create`, data);
+    }
+
+    async createPhotoImage(data: {} | any): Promise<any>{
+        return await Axios.post(`${this.pathPhoto}/upload/${id}`, name);
     }
 
 }

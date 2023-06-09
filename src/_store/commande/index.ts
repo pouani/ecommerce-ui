@@ -24,6 +24,15 @@ export const useOrderStore = defineStore({
             })
         },
 
+        async getCommandeByIdClient(id: number){
+            await Commande.getCommandesByIdClient(id).then((res: any) => {
+                console.log(res.data)
+                this.ordersClient = res.data;
+            }).catch((err: any) => {
+                console.log(err);
+            })
+        },
+
         async getOneCommande(id: number) {
             await Commande.getOneCommande(id).then((res: any) => {
                 this.order = res.data
@@ -39,8 +48,18 @@ export const useOrderStore = defineStore({
                 console.log(err)
             })
         },
-    }
 
+        async deleteCommande(commande: any){
+            await Commande.deleteCommande(commande).then((res: any) => {
+                this.orders = this.orders.filter((item: any) => item.id != commande);
+            }).catch((err: any) => {
+                console.log(err)
+            })
+        }
+    },
+    persist: {
+        paths: ["ordersClient"]
+    },
 });
 
 
