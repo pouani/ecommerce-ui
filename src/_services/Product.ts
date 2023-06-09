@@ -7,6 +7,8 @@ interface Products {
     codeProduit?: string | null;
     prixproduit: number;
     photo?: string | null;
+    extension?: string | null;
+    photoBytes?: ArrayBuffer;
     categorie: {};
 } 
 
