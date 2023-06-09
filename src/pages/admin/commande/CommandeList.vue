@@ -28,16 +28,21 @@
                 <li class="col-md">{{ item.client?.nomclient }}</li>
                 <li class="col-md-2">
                     <b-nav-item-dropdown text="produit" right class="col list-none btn">
-                        <b-dropdown-item href="#">Categorie 1</b-dropdown-item>
-                        <b-dropdown-item href="#">Categorie 2</b-dropdown-item>
-                        <b-dropdown-item href="#">Categorie 3</b-dropdown-item>
+                        <b-dropdown-item v-for="(item, index) in item.produits" :key="index">
+                            {{ item?.nomproduit }}
+                        </b-dropdown-item>
                     </b-nav-item-dropdown>
                 </li>
-                <li class="col-md-2">{{ item.statutcommande }}</li>
+                <li class="col-md-2">
+                    <span 
+                        class="rounded-32 py-1 px-2"
+                        :class="item.statutcommande == 'EN_PREPARATION' ? 'bg-info' : 'bg-success'"
+                    >{{ item.statutcommande == 'EN_PREPARATION' ? 'encours' : 'validée' }}</span>
+                </li>
                 <li class="col-md text-center">
                     <button class="btn default"><i class="fa-solid fa-pen-to-square"></i></button>
                     <button 
-                        @click="deleteProduct()"
+                        @click="deleteCommande(item.id)"
                         class="btn text-danger bg-trash mx-1"><i class="fa-solid fa-trash"></i></button>
                 </li>
             </ul>
@@ -58,6 +63,8 @@
 import { onMounted, computed, ref } from 'vue'
 import { useOrderStore } from '../../../_store'
 
+import Swal from 'sweetalert2'
+
 const useOrder = useOrderStore()
 console.log(useOrder.orders)
 
@@ -72,6 +79,27 @@ const paginateOrder = computed(() => {
     let end = currentPage.value * perPage.value;
     return useOrder.orders.slice(start, end);
 });
+
+const deleteCommande = (id) => {
+    Swal.fire({
+        title: 'Etes vous sur?',
+        text: "Vous ne pouvez plus revenir en arriere!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: "Oui, supprimer!"
+    }).then((result) => {
+    if (result.isConfirmed) {
+        useOrder.deleteCommande(id)
+        Swal.fire(
+        'Spprimer!',
+        'Votre produit a ete supprimer.',
+        'success'
+        )
+    }
+    })
+}
 
 onMounted(() => (
     useOrder.getAllCommandes()

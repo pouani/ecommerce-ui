@@ -1,7 +1,18 @@
 <template lang="">
     <div class="default">
-        <button @click="modalShow = !modalShow" class="btn bg-gray-200 rounded-32"><i class="fa-solid fa-user mx-1"></i>Connexion</button>
-
+        <button v-if="useClient?.token == null" @click="modalShow = !modalShow" class="btn bg-gray-200 rounded-32"><i class="fa-solid fa-user mx-1"></i>Connexion</button>
+        <b-nav-item-dropdown v-if="useClient?.token != null" :text="useClient?.client?.name" 
+            right class="bg-gray-200 rounded-32 btn p-0">
+            <b-dropdown-item>
+                Compte
+            </b-dropdown-item>
+            <b-dropdown-item class="text-danger">
+                <router-link :to="{name: 'suivi-commande'}"></router-link>
+            </b-dropdown-item>
+            <b-dropdown-item class="text-danger" @click="logout()">
+                Se deconnecter
+            </b-dropdown-item>
+        </b-nav-item-dropdown>
         <b-modal v-model="modalShow" hide-footer title="Se connecter" hide-header-close centered>
             <form action="" class="default">
                 <div class="mb-3">
@@ -45,11 +56,15 @@ import { useVuelidate } from '@vuelidate/core'
 import { required, email, minLength } from '@vuelidate/validators'
 import { useClientStore } from '../../_store'
 
+
+import { useAuthStore } from '../../_store'
+
+const auth = useAuthStore();
+
 const useClient = useClientStore();
 
 
 const router = useRouter();
-console.log(router)
 
 const modalShow = ref(false)
 
@@ -78,6 +93,10 @@ const submit = () => {
     }else{
         console.log(v$.value)
     }
+}
+
+const logout = () => {
+    localStorage.removeItem('client')
 }
 
 const changeType = () => {

@@ -16,7 +16,7 @@ export const useAuthStore = defineStore({
     }),
     getters: {
         isAuthenticated(): boolean {
-            return !!this.token;
+            return !!this.token
         }
     },
 
@@ -48,6 +48,7 @@ export const useAuthStore = defineStore({
 
         async setUser(){
             Account.setUser().then((res: any) => {
+                console.log(res)
                 this.user = res.data;
             }).catch((err: any) => {
                 console.log(err);
@@ -57,6 +58,8 @@ export const useAuthStore = defineStore({
         async logout(){
             Account.logout()
             if(localStorage.getItem('acess-token') == null){
+                localStorage.removeItem('acess-token')
+                localStorage.removeItem('auth')
                 router.push('/login')
             }
         },

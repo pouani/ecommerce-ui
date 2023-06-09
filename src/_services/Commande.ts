@@ -28,6 +28,11 @@ class Commande
         return await Axios.get(`${this.path}/all`);
     }
 
+    //function to get all commandes by idclient
+    async getCommandesByIdClient(id: number){
+        return await Axios.get(`${this.path}/all/client/${id}`);
+    }
+
     //function to get one commande
     async getOneCommande(id: number): Promise<Commandes> {
         return await Axios.get(`${this.path}/${id}`);

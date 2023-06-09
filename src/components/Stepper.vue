@@ -19,7 +19,7 @@
       
       <div class="step-buttons d-flex justify-content-end">
         <button class="btn rounded-32" @click="prevStep" :disabled="currentStepIndex === 0">Précedent</button>
-        <button class="btn btn-dark rounded-32 mx-2" @click="nextStep" :disabled="currentStepIndex === steps.length - 1">{{ steps[currentStepIndex].title }}</button>
+        <button class="btn btn-dark rounded-32 mx-2" @click="nextStep" :disabled="currentStepIndex === steps.length - 1">Suivant</button>
       </div>
     </div>
   </template>

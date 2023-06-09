@@ -63,6 +63,10 @@ import Login from '../Login.vue'
 import { ref, computed, onMounted } from 'vue'
 import { useCartStore } from '../../../_store/carts'
 import { useCategorieStore } from '../../../_store'
+import { useAuthStore } from '../../../_store'
+
+
+const auth = useAuthStore();
 
 const useCategorie = useCategorieStore()
 
@@ -70,6 +74,8 @@ const useCart = useCartStore()
 
 const quantity = ref(0)
 quantity.value = computed(() => useCart.getCartQuantity)
+
+
 
 onMounted(() => {
     useCategorie.getAllCategories()
