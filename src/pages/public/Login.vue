@@ -97,6 +97,8 @@ const submit = () => {
 
 const logout = () => {
     localStorage.removeItem('client')
+    localStorage.removeItem('client-token')
+    router.push({name: 'home'})
 }
 
 const changeType = () => {

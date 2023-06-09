@@ -84,6 +84,11 @@ const routes: Array<RouteRecordRaw> = [
                 component: () => import("../pages/admin/client/ClientList.vue"),
             },
             {
+                path: "/clients/create",
+                name: "create-client",
+                component: () => import("../pages/admin/client/FormClient.vue"),
+            },
+            {
                 path: "/commandes",
                 name: "list-commandes",
                 component: () => import("../pages/admin/commande/CommandeList.vue"),

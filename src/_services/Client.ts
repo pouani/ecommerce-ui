@@ -28,6 +28,10 @@ class Client
     async deleteClient(id: number): Promise<Client> {
         return await Axios.delete(`${this.path}/delete/${id}`);
     }
+
+    async createClient(client: Clients | any): Promise<Client> {
+        return await Axios.post(`${this.path}/create`, client);
+    }
     
 }
 
