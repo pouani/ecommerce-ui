@@ -565,3 +565,11 @@ body.dark .switch::before{
     left: 78px;
     width: calc(100% - 78px);
 }
+
+.client{
+    .create{
+        input{
+            width: 320px;
+        }
+    }
+}
