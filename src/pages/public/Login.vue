@@ -14,7 +14,7 @@
             </b-dropdown-item>
         </b-nav-item-dropdown>
         <b-modal v-model="modalShow" hide-footer title="Se connecter" hide-header-close centered>
-            <form action="" class="default">
+            <form action="" class="default" autocomplete="false" >
                 <div class="mb-3">
                     <div class="border d-flex align-items-center rounded overflow-hidden">
                         <input v-model="state.email" type="email" placeholder="votre email" class="py-2 w-100 px-2 border-0">

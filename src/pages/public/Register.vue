@@ -52,7 +52,7 @@
                     <button v-if="useClient.loading" type="button" class="btn btn-primary w-100">
                         <b-spinner class="white" label="Spinning"></b-spinner>
                     </button><br>
-                    <button v-if="!useClient.loading" type="button" class="btn btn-primary w-100" @click="submit">Je laisse mon message</button>
+                    <button v-if="!useClient.loading" type="button" class="btn btn-primary w-100" @click="submit">Je m'enregistre</button>
                 </form>
             </div>
         </div>
