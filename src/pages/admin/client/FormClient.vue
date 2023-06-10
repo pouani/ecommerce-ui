@@ -1,6 +1,7 @@
 <template lang="">
     <div>
         <div class="client">
+            <button @click="router.go(-1)" class="btn text-primary"><i class="fa-solid fa-arrow-left"></i>revenir</button>
             <div class="create d-flex justify-content-center">
                 <form action="" class="bg-white px-4 py-3 rounded">
                     <div class="d-flex gap-2">
@@ -62,6 +63,9 @@ import { ref, reactive, computed } from 'vue'
 import { useClientStore } from '../../../_store'
 import { useVuelidate } from '@vuelidate/core'
 import { required, email, sameAs, minLength, numeric } from '@vuelidate/validators'
+import {useRouter, useRoute } from 'vue-router';
+
+const router = useRouter();
 
 const useClient = useClientStore();
 

@@ -1,5 +1,7 @@
 <template lang="">
-    <div class="contact d-flex flex-column align-items-center ">
+    <div>
+        <button @click="router.go(-1)" class="btn text-primary"><i class="fa-solid fa-arrow-left"></i>revenir</button>
+        <div class="contact d-flex flex-column align-items-center ">
         <h3>Nouvelle commande</h3>
         <form action="" class="shadow bg-white py-3 px-4 rounded" >
             <div class="d-md-flex gap-2 mb-3">
@@ -89,6 +91,7 @@
             <button v-if="!useOrder.loading" @click="submit()" type="button" class="btn btn-primary" style="width: 320px;">Enregistrer la commande</button>
         </form>
     </div>
+    </div>
 </template>
 <script setup>
 import { reactive, ref, computed, onMounted } from 'vue'
@@ -97,8 +100,11 @@ import { useVuelidate } from '@vuelidate/core'
 import { required } from '@vuelidate/validators'
 import { useOrderStore } from '../../../_store'
 import { useProductsStore, useClientStore } from "../../../_store"
+import {useRouter, useRoute } from 'vue-router';
 
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
+
+const router = useRouter();
 
 const useProduit = useProductsStore()
 const useClient = useClientStore()

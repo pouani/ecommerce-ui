@@ -97,7 +97,7 @@ import VueMultiselect from 'vue-multiselect'
 import Swal from 'sweetalert2'
 
 const useOrder = useOrderStore()
-console.log(useOrder.orders)
+
 
 const rows =  computed(() => {
     return useOrder.orders?.length
