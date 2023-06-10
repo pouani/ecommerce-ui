@@ -69,6 +69,11 @@ const routes: Array<RouteRecordRaw> = [
                 component: () => import('../pages/admin/dashboard/Dashboard.vue'),
             },
             {
+                path: '/users',
+                name: 'users',
+                component: () => import('../pages/admin/users/User.vue')
+            },
+            {
                 path: '/produits',
                 name: 'list-produits',
                 component: () => import('../pages/admin/product/ProductList.vue'),
@@ -92,6 +97,11 @@ const routes: Array<RouteRecordRaw> = [
                 path: "/commandes",
                 name: "list-commandes",
                 component: () => import("../pages/admin/commande/CommandeList.vue"),
+            },
+            {
+                path: "/add-commande",
+                name: "add-commande",
+                component: () => import("../pages/admin/commande/FormCommande.vue")
             },
             {
                 path: "/:pathMatch(.*)", redirect: "/login"

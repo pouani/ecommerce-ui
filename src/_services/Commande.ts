@@ -44,8 +44,13 @@ class Commande
     }
 
     //function to create one commande
-    async createCommande(commande: Commandes): Promise<Commandes> {
+    async createCommande(commande: Commandes | any): Promise<Commandes> {
         return await Axios.post(`${this.path}/create`, commande);
+    }
+
+    //change status commande
+    async changeStatusCommande(id: number, status: string): Promise<Commandes> {
+        return await Axios.patch(`${this.path}/update/etat/${id}/${status}`);
     }
 }
 

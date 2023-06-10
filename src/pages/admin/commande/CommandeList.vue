@@ -7,7 +7,7 @@
                     <div class="col-md-6">
                         <input @change="useFilter(useProduit.products, search)" v-model="search" type="text" placeholder="recherchez un produit" class="form-control">
                     </div>
-                    <button @click="modalShow = true" class="btn bg-primary col text-white">+ Commande</button>
+                    <router-link :to="{ name: 'add-commande' }" class="btn bg-primary col text-white">+ Commande</router-link>
                 </div>
             </div>
             <ul class="row gray-600 list-none p-0 m-0">
@@ -15,6 +15,7 @@
                 <li class="col-md">Code</li>
                 <li class="col-md">Client</li>
                 <li class="col-md">Produit</li>
+                <li class="col-md">Quantite</li>
                 <li class="col-md">Status</li>
                 <li class="col-md text-center">Action</li>
             </ul>
@@ -23,22 +24,50 @@
                 v-for="(item, index) in paginateOrder" :key="index"
                 class="row default align-items-center default py-2 rounded bg-white list-none p-0 mx-0 mb-1">
                 
-                <li class="col-md">{{ item.nomcommande }}</li>
+                <li class="col-md-2">{{ item.nomcommande }}</li>
                 <li class="col-md">{{ item.codeCommande }}</li>
                 <li class="col-md">{{ item.client?.nomclient }}</li>
-                <li class="col-md-2">
+                <li class="col-md">
                     <b-nav-item-dropdown text="produit" right class="col list-none btn">
                         <b-dropdown-item v-for="(item, index) in item.produits" :key="index">
                             {{ item?.nomproduit }}
                         </b-dropdown-item>
                     </b-nav-item-dropdown>
                 </li>
-                <li class="col-md-2">
-                    <span 
+                <li class="col-md">{{ item.quantite }}</li>
+                <li class="col-md">
+                    <!-- <span 
+                        v-if="item.statutcommande == 'EN_PREPARATION' || item.statutcommande == 'VALIDEE'"
                         class="rounded-32 py-1 px-2"
                         :class="item.statutcommande == 'EN_PREPARATION' ? 'bg-info' : 'bg-success'"
-                    >{{ item.statutcommande == 'EN_PREPARATION' ? 'encours' : 'validée' }}</span>
+                    >{{ item.statutcommande == 'EN_PREPARATION' ? 'encours' : 'validée' }}
+                        <i class="fa-solid fa-pen cursor-pointer"></i>
+                    </span> -->
+                    <span v-if="item.statutcommande == 'EN_PREPARATION'" class="rounded-32 py-1 px-2 bg-info">
+                        en cours <i @click="changeStatus(item.id)"
+                                class="fa-solid fa-pen cursor-pointer"></i>
+                    </span>
+                    <span v-if="item.statutcommande == 'VALIDEE'" class="rounded-32 py-1 px-2 bg-primary">
+                        validée <i @click="changeStatus(item.id)"
+                                class="fa-solid fa-pen cursor-pointer"></i>
+                    </span>
+                    <span v-if="item.statutcommande == 'LIVREE'" class="rounded-32 py-1 px-2 bg-success">livrée</span>
                 </li>
+                <div v-if="chStatus != null" class="position-absolute top-50 start-50 bg-white shadow w-content p-3 rounded">
+                    <span class="boreder p-1 cursor-pointer" @click="chStatus = null">X</span>
+                    <VueMultiselect
+                            v-model="status"
+                            :options="StatusCommande"
+                            :close-on-select="true"
+                            :clear-on-select="false"
+                            :preselect-first="false"
+                            label="name"
+                            track-by="value"
+                            style="width: 220px;"
+                            @select="changeStatusCmd(item.id, item.statutcommande)"
+                        >
+                    </VueMultiselect>
+                </div>
                 <li class="col-md text-center">
                     <button class="btn default"><i class="fa-solid fa-pen-to-square"></i></button>
                     <button 
@@ -60,8 +89,9 @@
     </div>
 </template>
 <script setup>
-import { onMounted, computed, ref } from 'vue'
+import { onMounted, computed, ref, reactive } from 'vue'
 import { useOrderStore } from '../../../_store'
+import VueMultiselect from 'vue-multiselect'
 
 import Swal from 'sweetalert2'
 
@@ -79,6 +109,24 @@ const paginateOrder = computed(() => {
     let end = currentPage.value * perPage.value;
     return useOrder.orders.slice(start, end);
 });
+
+const chStatus = ref(null)
+
+const changeStatus = (id) => {
+    chStatus.value = id
+}
+
+const status = ref('');
+
+const StatusCommande = reactive([
+    { name: 'En Préparation', value: 'EN_PREPARATION' },
+    { name: 'Validée', value: 'VALIDEE' },
+    { name: 'Livrée', value: 'LIVREE' },
+])
+
+const changeStatusCmd = (id, status) => {
+    useOrder.changeStatusCommande(id, status);
+}
 
 const deleteCommande = (id) => {
     Swal.fire({
@@ -105,3 +153,4 @@ onMounted(() => (
     useOrder.getAllCommandes()
 ))
 </script>
+<style src="vue-multiselect/dist/vue-multiselect.css"></style>

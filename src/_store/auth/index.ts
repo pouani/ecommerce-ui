@@ -4,6 +4,7 @@ import router from '../../_routes';
 
 import Account from "../../_services/Account";
 import Swal from 'sweetalert2'
+import User from "../../_services/User";
 
 //store users and auth
 export const useAuthStore = defineStore({
@@ -86,6 +87,23 @@ export const useAuthStore = defineStore({
             }).catch((err) => [
                 console.log(err)
             ])
+        },
+
+        async createUser(data: {} | any){
+
+            const userRequest = {
+                email: data.email,
+                nomutilisateur: data.name,
+                prenomutilisateur: data.prenom,
+                motsdepasse: data.password,
+                photo: data.photo,
+                photoBytes: data.photoBytes
+            }
+            await User.createUtilisateur(userRequest).then((res: any) => {
+                console.log(res.data)
+            }).catch((err: any) => {
+                console.log(err);
+            });
         }
     },
     persist: true,

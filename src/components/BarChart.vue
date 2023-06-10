@@ -8,6 +8,7 @@
   import { Chart, registerables } from 'chart.js';
   import { BarChart, useBarChart } from 'vue-chart-3';
   import { ref, computed, defineComponent } from 'vue';
+  import {useClientStore} from "../_store"
   
   Chart.register(...registerables);
   
@@ -17,6 +18,7 @@
       BarChart,
     },
     setup() {
+      const useStore = useClientStore()
       const data = ref([30, 40, 60, 70, 5]);
   
       const chartData = computed(() => ({

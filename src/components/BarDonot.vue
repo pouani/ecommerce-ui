@@ -19,7 +19,7 @@
     components: { DoughnutChart },
     setup() {
       const dataValues = ref([30, 40, 60, 70, 5]);
-      const dataLabels = ref(["Paris", "Nîmes", "Toulon", "Perpignan", "Autre"]);
+      const dataLabels = ref(["2018", "2019", "2020", "2021", "2022"]);
       const toggleLegend = ref(true);
   
       const testData = computed<ChartData<"doughnut">>(() => ({
@@ -51,7 +51,7 @@
           },
           title: {
             display: true,
-            text: "Chart.js Doughnut Chart",
+            text: "Commandes periodique",
           },
         },
       }));

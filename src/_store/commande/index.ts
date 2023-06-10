@@ -7,7 +7,8 @@ export const useOrderStore = defineStore({
         orders: [] as any,
         order: {} as any,
         ordersClient: [] as any,
-        showCommande: false
+        showCommande: false,
+        loading: false,
     }),
     getters: {
         getCommande(): any {
@@ -42,9 +43,26 @@ export const useOrderStore = defineStore({
         },
 
         async createCommande(data: {} | any) {
-            await Commande.createCommande(data).then((res: any) => {
+            let produitMap = data.produits.map((item: any) => {
+                return{
+                    id: item.id 
+                }
+            })
+            let orderRequest = {
+                client: { id: data.client.id },
+                nomcommande: data.name,
+                codeCommande: data.code,
+                datecommande: data.date,
+                produits: produitMap,
+                quantite: data.quantite,
+                statutcommande: data.status.value
+            }
+            this.loading = true;
+            await Commande.createCommande(orderRequest).then((res: any) => {
+                this.loading = false;
                 this.orders.push(res.data)
             }).catch((err: any) => {
+                this.loading = false;
                 console.log(err)
             })
         },
@@ -53,6 +71,17 @@ export const useOrderStore = defineStore({
             await Commande.deleteCommande(commande).then((res: any) => {
                 this.orders = this.orders.filter((item: any) => item.id != commande);
             }).catch((err: any) => {
+                console.log(err)
+            })
+        },
+
+        async changeStatusCommande(id: number, status: ""){
+            this.loading = true;
+            await Commande.changeStatusCommande(id, status).then((res: any) => {
+                this.loading = false;
+                console.log(res.data)
+            }).catch((err: any) => {
+                this.loading = false;
                 console.log(err)
             })
         }
