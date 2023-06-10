@@ -79,7 +79,7 @@ export const useOrderStore = defineStore({
             this.loading = true;
             await Commande.changeStatusCommande(id, status).then((res: any) => {
                 this.loading = false;
-                console.log(res.data)
+                this.orders.find((item: any) => item.id == id).statutcommande = status;
             }).catch((err: any) => {
                 this.loading = false;
                 console.log(err)

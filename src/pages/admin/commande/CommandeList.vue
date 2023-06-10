@@ -46,10 +46,12 @@
                     <span v-if="item.statutcommande == 'EN_PREPARATION'" class="rounded-32 py-1 px-2 bg-info">
                         en cours <i @click="changeStatus(item.id)"
                                 class="fa-solid fa-pen cursor-pointer"></i>
+                                
                     </span>
                     <span v-if="item.statutcommande == 'VALIDEE'" class="rounded-32 py-1 px-2 bg-primary">
                         validée <i @click="changeStatus(item.id)"
                                 class="fa-solid fa-pen cursor-pointer"></i>
+                                <b-spinner class="text-white" label="Spinning"></b-spinner>
                     </span>
                     <span v-if="item.statutcommande == 'LIVREE'" class="rounded-32 py-1 px-2 bg-success">livrée</span>
                 </li>
@@ -64,8 +66,7 @@
                             label="name"
                             track-by="value"
                             style="width: 220px;"
-                            @select="changeStatusCmd(item.id, item.statutcommande)"
-                        >
+                            @select="changeStatusCmd(chStatus, status.value)" >
                     </VueMultiselect>
                 </div>
                 <li class="col-md text-center">
