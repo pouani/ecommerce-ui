@@ -51,7 +51,6 @@
                     <span v-if="item.statutcommande == 'VALIDEE'" class="rounded-32 py-1 px-2 bg-primary">
                         validée <i @click="changeStatus(item.id)"
                                 class="fa-solid fa-pen cursor-pointer"></i>
-                                <b-spinner class="text-white" label="Spinning"></b-spinner>
                     </span>
                     <span v-if="item.statutcommande == 'LIVREE'" class="rounded-32 py-1 px-2 bg-success">livrée</span>
                 </li>
