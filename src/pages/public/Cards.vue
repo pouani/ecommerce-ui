@@ -1,6 +1,6 @@
 <template lang="">
-    <div>
-        <div class="my-5 d-flex gap-1 justify-content-end">
+    <div class="pt-5">
+        <!-- <div class="my-5 d-flex gap-1 justify-content-end">
             <li class="list-none bg-white w-content px-3 py-2 rounded-32">
                 <b-nav-item-dropdown text="Prix" right>
                     <b-dropdown-item href="#">250 - 900</b-dropdown-item>
@@ -17,13 +17,13 @@
                     <b-dropdown-item href="#">pas de notes</b-dropdown-item>
                 </b-nav-item-dropdown>
             </li>
-        </div>
+        </div> -->
         <h3>Meilleurs Produits</h3>
         <div class="row">
             <CardItems 
                 class="col-6 col-md-3 p-1" 
-                v-for="item in useProducts.products" :key="index" 
-                :productImage="item.image"
+                v-for="item in paginateProduct" :key="index" 
+                :productImage="item.photo"
                 :productName="item.nomproduit"
                 :productPrice="item.prixproduit"
                 :productDesciption="useTruncate(item.description, 20)"
@@ -37,13 +37,25 @@
     </div>
 </template>
 <script setup>
-import { onMounted } from 'vue'
+import { onMounted, computed, ref } from 'vue'
 import CardItems from "./views/CardItems.vue"
 import { useTruncate } from "../../_utils/useTruncate"
 
 import { useProductsStore } from '../../_store'
 
 const useProducts = useProductsStore();
+
+const rows =  computed(() => {
+    return useProducts.products?.length
+});
+let perPage = ref(8);
+let currentPage = ref(1);
+
+const paginateProduct = computed(() => {
+    let start = (currentPage.value - 1) * perPage.value;
+    let end = currentPage.value * perPage.value;
+    return useProducts.products.slice(start, end);
+});
 
 onMounted(() => {
     useProducts.getAllProducts()

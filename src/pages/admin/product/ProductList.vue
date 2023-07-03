@@ -8,33 +8,35 @@
                         <input @change="useFilter(useProduit.products, search)" v-model="search" type="text" placeholder="recherchez un produit" class="form-control">
                     </div>
                     <button @click="modalShow = true" class="btn bg-primary col text-white">+ Produit</button>
-                    <b-nav-item-dropdown text="Categorie" right class="col list-none btn border border-primary">
+                    <!-- <b-nav-item-dropdown text="Categorie" right class="col list-none btn border border-primary">
                         <b-dropdown-item href="#">
                             <router-link exact :to="{ name: 'list-categories' }">                           
                                 <span class="">Plus de categories</span>                             
                             </router-link>
                         </b-dropdown-item>
-                        <b-dropdown-item href="#">Categorie 1</b-dropdown-item>
-                        <b-dropdown-item href="#">Categorie 2</b-dropdown-item>
-                        <b-dropdown-item href="#">Categorie 3</b-dropdown-item>
-                    </b-nav-item-dropdown>
+                    </b-nav-item-dropdown> -->
                 </div>
             </div>
             <ul class="row gray-600 list-none p-0 m-0">
-                <li class="col-md-2">#</li>
+                <li class="col-md-1">#</li>
                 <li class="col-md">Nom</li>
+                <li class="col-md">Description</li>
                 <li class="col-md">Code</li>
-                <li class="col-md">Prix</li>
+                <li class="col-md-1">Prix</li>
                 <li class="col-md text-center">Action</li>
             </ul>
             <ul 
                 v-if="useProduit?.products.length"
                 v-for="(item, index) in paginateProduct" :key="index"
                 class="row default align-items-center default py-2 rounded bg-white list-none p-0 mx-0 mb-1">
-                <li class="col-md-2"><img src="" alt=""></li>
+                <li class="col-md-1 img-list">
+                    <img v-if="item.photo != null" :src="item.photo" :alt="item.nomproduit">
+                    <img v-if="item.photo == null" src="../../../images/tina-guina-unsplash.jpg" alt="">
+                </li>
                 <li class="col-md">{{ item.nomproduit }}</li>
+                <li class="col-md">{{ useTruncate(item.description, 24) }}</li>
                 <li class="col-md">{{ item.codeProduit }}</li>
-                <li class="col-md">{{ item.prixproduit }}cfa</li>
+                <li class="col-md-1">{{ item.prixproduit }}cfa</li>
                 <li class="col-md text-center">
                     <button class="btn default"><i class="fa-solid fa-pen-to-square"></i></button>
                     <button 
@@ -42,7 +44,10 @@
                         class="btn text-danger bg-trash mx-1"><i class="fa-solid fa-trash"></i></button>
                 </li>
             </ul>
-            <div class="">
+            <div class="d-flex justify-content-between">
+                <li class="list-none gray-600">
+                    <span>Affichage de {{perPage}} produis par pages</span>
+                </li>
                 <b-pagination
                     v-model="currentPage"
                     :total-rows="rows"
@@ -56,6 +61,7 @@
         <b-modal v-model="modalShow" hide-footer title="Nouveau Produit" hide-header-close centered>
             <form action="" class="default">
                 <div class="form-group mb-2">
+                    <label for="" class="form_label">Categorie</label>
                     <VueMultiselect
                         v-model="state.categorie"
                         :options="useCategorie.categories"
@@ -76,7 +82,7 @@
                 </div>
                 <div class="form-group mb-2">
                     <label for="nom" class="form-label">Description</label>
-                    <textarea v-model="state.description" name="" id="" cols="15" rows="5" class="form-control"></textarea>
+                    <textarea v-model="state.description" cols="15" rows="5" class="form-control"></textarea>
                     <em v-if="v$.description.$error" class="text-end text-danger list-none">
                         Veillez fournir la description
                     </em>
@@ -105,6 +111,7 @@ import { ref, reactive, computed, onMounted } from "vue"
 import { useVuelidate } from '@vuelidate/core'
 import { required } from '@vuelidate/validators'
 import { useFilter } from '../../../_utils/useFilter'
+import { useTruncate } from "../../../_utils/useTruncate"
 import VueMultiselect from 'vue-multiselect'
 import { useCategorieStore, useProductsStore } from "../../../_store"
 
@@ -118,7 +125,7 @@ const search = ref("")
 const rows =  computed(() => {
     return useProduit.products?.length
 });
-let perPage = ref(8);
+let perPage = ref(5);
 let currentPage = ref(1);
 
 const paginateProduct = computed(() => {
@@ -137,19 +144,21 @@ const state = reactive({
     designation: '',
     description: '',
     prix: 1,
-    photo: null,
+    photo: '',
+    photoBytes: null,
 });
 
 const handleFileInputChange = (e) => {
     const file = e.target.files[0]
-    state.photoBytes =  file;
+    state.photo =  file.name;
     const reader = new FileReader();
     reader.onload = () => {
-        state.photo = Array.from(new Uint8Array(reader.result));
+        state.photoBytes = Array.from(new Uint8Array(reader.result));
         // state.extension = file.name.split('.').pop();
-        // console.log("photo == ",state.photo)
+
+        console.log("photo byte == ",state.photoBytes)
     };
-    console.log("photo == ",state.photo)
+    console.log("photo name == ",state.photo)
     reader.readAsArrayBuffer(file);
 }
 
@@ -172,6 +181,7 @@ const submit = () => {
         useProduit.createProduct(state).then(() => {
             modalShow.value = false
         })
+        console.log(state)
     }else{
         console.log(v$.value)
     }

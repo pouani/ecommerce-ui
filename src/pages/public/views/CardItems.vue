@@ -1,13 +1,14 @@
 <template lang="">
     <div>
-        <div class="card border-0 default gap-2" style="max-width: 20rem;">
+        <div class="card border-0 default gap-2 h-100 justify-content-between" style="max-width: 20rem;">
             <router-link 
                 @click="useCart.addToCart(product), useCart.showCart = false" 
                 :to="{name: 'product-detail', params: { id: product.id}}"
                 class=""
             >
                 <div class="card-img">
-                    <img :src="productImage" alt="" class="w-100">
+                    <img v-if="productImage != null" :src="productImage" alt="" class="w-100" />
+                    <img v-if="productImage == null" src="../../../images/tina-guina-unsplash.jpg" alt="" class="h-50" style="height: 200px !important;"/>
                 </div>
                 <div class="px-2">
                     <ul class="list-none p-0 m-0 d-flex justify-content-between">

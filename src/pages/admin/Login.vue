@@ -25,11 +25,18 @@
                 </div>
                 <div>
                     <button
+                        v-if="!auth.loading"
                         type="button" 
                         @click="submit"
                         class="btn btn-primary w-100">
-                        <span v-if="!auth.loading">Je me connecte</span>
+                        <span>Je me connecte</span>
                         <b-spinner v-if="auth.loading" variant="info" label="Spinning"></b-spinner>
+                    </button>
+                    <button
+                        v-if="auth.loading"
+                        type="button"
+                        class="btn btn-primary w-100">
+                        <b-spinner variant="info" label="Spinning"></b-spinner>
                     </button>
                 </div>
             </form>

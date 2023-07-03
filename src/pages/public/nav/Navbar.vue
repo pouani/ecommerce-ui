@@ -2,7 +2,7 @@
     <div>
         <b-navbar toggleable="lg" type="dark" class="border-bottom">
             <b-navbar-brand href="#">
-                Sk-M
+                SK-MARKET
             </b-navbar-brand>
 
             <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
@@ -25,10 +25,13 @@
                         <router-link exact class="h-content" :to="{ name: 'all-product' }">
                             Produits
                         </router-link>
-                        <!-- <router-link class="h-content" :to="{ name: 'all-product' }">
-                            Produits
-                        </router-link> -->
-                        <li class="h-content" href="#">Livraison</li>
+                        <router-link v-if="useClient?.token != null"
+                                :to="{ name: 'suivi-commande' }" 
+                                class="h-content"
+                            >
+                                Mes Commandes
+                        </router-link>
+                        <!-- <li class="h-content" href="#">Livraison</li> -->
                         <router-link class="h-content" :to="{ name: 'contact' }">
                             Contact
                         </router-link>
@@ -36,20 +39,19 @@
 
                     <!-- Right aligned nav items -->
                     <b-navbar-nav class="ml-auto gap-4">
-                        <b-nav-form class="border">
+                        <!-- <b-nav-form class="border">
                             <b-form-input size="sm" class="mr-sm-2" placeholder="Rechercher un produit"></b-form-input>
                             <button class="btn" type="submit">
                                 <i class="fa-solid fa-magnifying-glass"></i>
                             </button>
-                        </b-nav-form>
-                        <div class="d-flex gap-2">
+                        </b-nav-form> -->
+                        <div class="d-flex gap-2 align-items-center">
                             <button class="btn" @click="useCart.showCart = !useCart.showCart">
                                 <span class="cart-quantity">
                                     {{ quantity }}
                                 </span>
                                 <i class="fa-solid fa-cart-shopping"></i>
                             </button>
-
                             <Login />
                         </div>
                     </b-navbar-nav>
@@ -64,6 +66,10 @@ import { ref, computed, onMounted } from 'vue'
 import { useCartStore } from '../../../_store/carts'
 import { useCategorieStore } from '../../../_store'
 import { useAuthStore } from '../../../_store'
+import { useClientStore } from '../../../_store'
+
+
+const useClient = useClientStore();
 
 
 const auth = useAuthStore();

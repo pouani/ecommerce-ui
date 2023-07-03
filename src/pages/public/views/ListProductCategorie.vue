@@ -5,7 +5,7 @@
             <CardItems 
                 class="col-6 col-md-3 p-1" 
                 v-for="item in dataProduct" :key="index" 
-                :productImage="item.image"
+                :productImage="item.photo"
                 :productName="item.nomproduit"
                 :productPrice="item.prixproduit"
                 :productDesciption="useTruncate(item.description, 20)"

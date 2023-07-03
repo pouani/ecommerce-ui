@@ -50,8 +50,11 @@ export const useProductsStore = defineStore({
             const requestData = {
                 categorie: { id: data.categorie.id },
                 nomproduit: data.designation,
+                description: data.description,
+                codeProduit: "A",
                 prixproduit: data.prix,
-                photo: "",
+                photo: data.photo,
+                photoBytes: data.photoBytes
             }
             console.log(requestData)
             await Product.createProduit(requestData).then((res: {} | any)=> {

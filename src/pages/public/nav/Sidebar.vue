@@ -9,7 +9,8 @@
             v-for="(item, index) in useCart.cart" :key="item.index"
             class="px-3 py-2 mt-3 d-flex justify-content-between border-top">
             <div class="cart-img rounded">
-                <img :src="item?.image" alt="">
+                <img v-if="item.photo != null" :src="item.photo" :alt="item.nomproduit">
+                <img v-if="item.photo == null" src="../../../images/tina-guina-unsplash.jpg" alt="">
             </div>
             <div>
                 <h6>{{ item.quantity + ' - '}}{{ item.nomproduit }}</h6>

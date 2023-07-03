@@ -7,7 +7,13 @@
                     <div class="col-md-6">
                         <input @change="useFilter(useProduit.products, search)" v-model="search" type="text" placeholder="recherchez un produit" class="form-control">
                     </div>
-                    <button @click="modalShow = true" class="btn bg-primary col text-white">+ Commande</button>
+                    <router-link 
+                        :to="{ name: 'all-product' }" 
+                        class="btn btn-primary col text-white rounded-32"
+                        @click="useCart.showCart = false"
+                    >
+                        Nouvelle Commande
+                    </router-link>
                 </div>
             </div>
             <ul class="row gray-600 list-none p-0 m-0">

@@ -1,7 +1,7 @@
 <template lang="">
     <div class="default">
-        <button v-if="useClient?.token == null" @click="modalShow = !modalShow" class="btn bg-gray-200 rounded-32"><i class="fa-solid fa-user mx-1"></i>Connexion</button>
-        <b-nav-item-dropdown v-if="useClient?.token != null" :text="useClient?.client?.name" 
+        <button v-if="!tokenClient" @click="modalShow = !modalShow" class="btn bg-gray-200 rounded-32"><i class="fa-solid fa-user mx-1"></i>Connexion</button>
+        <b-nav-item-dropdown v-if="tokenClient" :text="useClient?.client?.name" 
             right class="bg-gray-200 rounded-32 btn p-0">
             <b-dropdown-item>
                 Compte
@@ -12,6 +12,7 @@
             <b-dropdown-item class="text-danger" @click="logout()">
                 Se deconnecter
             </b-dropdown-item>
+            
         </b-nav-item-dropdown>
         <b-modal v-model="modalShow" hide-footer title="Se connecter" hide-header-close centered>
             <form action="" class="default" autocomplete="false" >
@@ -88,6 +89,7 @@ const submit = () => {
     v$.value.$validate()
     if(!v$.value.$error){
         useClient.login(state).then(() => {
+            router.push('/suivicommade')
             modalShow.value = false
         })
     }else{
@@ -95,10 +97,12 @@ const submit = () => {
     }
 }
 
+const tokenClient = computed(() => useClient.token ? true : false)
+
 const logout = () => {
-    localStorage.removeItem('client')
-    localStorage.removeItem('client-token')
-    router.push({name: 'home'})
+    useClient.logout().then(() => {
+        location.reload()
+    })
 }
 
 const changeType = () => {

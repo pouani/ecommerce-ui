@@ -32,6 +32,12 @@
                             </router-link>
                         </li>
                         <li class="nav-link">
+                            <router-link exact :to="{ name: 'list-categories' }">
+                                <i class="fa-solid fa-list icon"></i>                            
+                                <span class="text nav-text">Categories</span>                             
+                            </router-link>
+                        </li>
+                        <li class="nav-link">
                             <router-link exact :to="{ name: 'list-produits' }">
                                 <i class="fa-solid fa-list icon"></i>                            
                                 <span class="text nav-text">Produits</span>                             
@@ -49,13 +55,7 @@
                                 <span class="text nav-text">Clients</span>                           
                             </router-link>
                         </li>
-                        <li class="nav-link">
-                            <a href="#">
-                                <i class="fa-solid fa-chart-simple icon"></i>                             
-                                <span class="text nav-text">Analytics</span>                             
-                            </a>
-                        </li>
-                        <li class="nav-link">
+                        <li class="nav-link disabled">
                             <a href="#">
                                 <i class="fa-solid fa-gear icon"></i>                             
                                 <span class="text nav-text">Roles</span>                             

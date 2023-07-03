@@ -3,7 +3,8 @@
         <div class="product h-100">
             <div class="product_content">
             <div class="product_content-img">
-                <img :src="useProducts.product?.image" alt="" class="product_content-img-desktop">
+                <img v-if="useProducts.product?.photo != null" :src="useProducts.product?.photo" alt="" class="product_content-img-desktop">
+                <img v-if="useProducts.product?.photo == null" src="../../../images/tina-guina-unsplash.jpg" alt="" class="product_content-img-desktop"/>
             </div>
             <div class="product_content-info">
                 <span class="type">{{ useProducts.product?.categorie?.nomCategorie }}</span>
@@ -13,7 +14,7 @@
                 </p>
                 <div class="flex">
                 <h3 class="new_price">{{useProducts.product?.prixproduit}}f</h3>
-                <h5 class="last_price">169.99f</h5>
+                <!-- <h5 class="last_price">169.99f</h5> -->
                 </div>
                 <div class="d-flex flex-column gap-2">
                     <div class="d-flex border rounded-32">

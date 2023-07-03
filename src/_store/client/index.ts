@@ -27,7 +27,6 @@ export const useClientStore = defineStore({
                 if(res.data.accessToken){
                     this.token = localStorage.getItem('client-token');
                     this.client = res.data.userDetails;
-                    router.push('/suivicommade')
                 }
             }).catch((err: any) => {
                 this.loading = false;
@@ -41,11 +40,21 @@ export const useClientStore = defineStore({
                 localStorage.setItem('client-token', res.data.accessToken)
                 this.loading = false;
                 if(res.data.accessToken){
+                    this.loading = false;
                     this.token = localStorage.getItem('client-token');
                     this.client = res.data.userDetails;
                     router.push('/commande')
                 }
             })
+        },
+
+        async logout(){
+            Account.logoutClient()
+            if(localStorage.getItem('client-token') == null){
+                localStorage.removeItem('client-token')
+                localStorage.removeItem('client')
+                router.push('/products')
+            }
         },
 
         async createClient(state: {} | any){

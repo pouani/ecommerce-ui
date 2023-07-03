@@ -17,9 +17,10 @@
         </div>
       </div>
       
-      <div class="step-buttons d-flex justify-content-end">
+      <div class="step-buttons d-flex justify-content-end" :class="!validations ? 'd-none' : 'd-block'">
         <button class="btn rounded-32" @click="prevStep" :disabled="currentStepIndex === 0">Précedent</button>
-        <button class="btn btn-dark rounded-32 mx-2" @click="nextStep" :disabled="currentStepIndex === steps.length - 1">Suivant</button>
+        <button class="btn btn-dark rounded-32 mx-2" @click="nextStep" v-if="currentStepIndex < steps.length - 1">Suivant</button>
+        <button v-if="currentStepIndex === steps.length - 1" class="btn btn-primary rounded-32 mx-2" @click="submit">Soumettre la commande</button>
       </div>
     </div>
   </template>

@@ -49,13 +49,13 @@ export const useOrderStore = defineStore({
                 }
             })
             let orderRequest = {
-                client: { id: data.client.id },
+                client: { id: data.client?.id },
                 nomcommande: data.name,
                 codeCommande: data.code,
                 datecommande: data.date,
                 produits: produitMap,
                 quantite: data.quantite,
-                statutcommande: data.status.value
+                statutcommande: data.status?.value
             }
             this.loading = true;
             await Commande.createCommande(orderRequest).then((res: any) => {

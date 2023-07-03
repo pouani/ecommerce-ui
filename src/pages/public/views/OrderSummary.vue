@@ -22,15 +22,16 @@
             <div v-for="(item, index) in cartData" :key="index">
                 <ul class="p-0 border-bottom rounded py-2 px-1">
                     <li class="row">
-                        <div class="col-2 rounded hidden">
-                            <img :src="item.image" alt="">
+                        <div class="col-2 rounded hidden img-list">
+                            <img v-if="item.photo != null" :src="item.photo" alt="" />
+                            <img v-if="item.photo == null" src="../../../images/tina-guina-unsplash.jpg" alt="" />
                         </div>
                         <p class="col-3 text-center m-0 mt-2">{{ item.nomproduit }}</p>
                         <div class="col-4 text-center">
                             <div class="d-flex border rounded-32">
-                                <button class="btn">-</button>
-                                <input type="text" v-model="quantity" class="form-control text-center border-0">
-                                <button class="btn">+</button>
+                                <button @click="useCart.decrementQuantity(item)" class="btn">-</button>
+                                <input type="text" v-model="item.quantity" class="form-control text-center border-0">
+                                <button @click="useCart.incrementQuantity(item)" class="btn">+</button>
                             </div>
                         </div>
                         <p class="col-3 text-center mb-0 mt-2">{{ item.prixproduit }}</p>
@@ -68,6 +69,8 @@ const useCart = useCartStore()
 const routes = useRoute();
 
 const cartData = useCart.cart;
+
+const quantity = ref(0)
 
 const totalPrice = ref(0)
 const totalQuantity = ref(0)
